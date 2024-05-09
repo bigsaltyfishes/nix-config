@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  # 配置新用户 molyuu
   users.users.molyuu = {
     isNormalUser = true;
     home = "/home/molyuu";

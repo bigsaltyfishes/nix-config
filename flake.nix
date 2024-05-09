@@ -18,12 +18,17 @@
 
     # Rust Toolchains
     rust-overlay.url = "github:oxalica/rust-overlay";
+
+    # WSL
+    NixOS-WSL.url = "github:nix-community/NixOS-WSL";
+    NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     { self
     , nixpkgs
     , nur
+    , NixOS-WSL
     , home-manager
     , ...
     } @ inputs:
@@ -34,7 +39,7 @@
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        molyuu = nixpkgs.lib.nixosSystem {
+        molyuu-laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs outputs;
@@ -43,7 +48,9 @@
           modules = [
             nur.nixosModules.nur
 
-            ./profiles/molyuu/configuration.nix
+            ./profiles
+            ./machines/f117-b6ck/configuration.nix
+            
             (import ./overlays)
 
             home-manager.nixosModules.home-manager
@@ -51,7 +58,36 @@
               home-manager.useUserPackages = true;
 
               home-manager.users.molyuu = import ./users/home/molyuu.nix;
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = {
+                inherit inputs; 
+              };
+            }
+          ];
+        };
+
+        molyuu-wsl = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs outputs;
+          };
+          # > Our main nixos configuration file <
+          modules = [
+            nur.nixosModules.nur
+
+            ./profiles
+            ./machines/wsl/configuration.nix
+            NixOS-WSL.nixosModules.wsl
+
+            (import ./overlays)
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useUserPackages = true;
+
+              home-manager.users.molyuu = import ./users/home/molyuu.nix;
+              home-manager.extraSpecialArgs = {
+                inherit inputs; 
+              };
             }
           ];
         };

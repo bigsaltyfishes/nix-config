@@ -1,5 +1,12 @@
-{ pkgs, inputs, ... }:
+{ lib, pkgs, inputs, osConfig, ... }:
+let
+  profile = osConfig.molyuu.system.profile;
+in
 {
+  imports = [
+    ../../overlays/default.nix
+  ];
+  
   home.username = "molyuu";
   home.homeDirectory = "/home/molyuu";
 
@@ -13,17 +20,19 @@
     nixd
     nixpkgs-fmt
     vim
+    wget
     lshw
     neofetch
     zinit
     python3
+    glxinfo
+  ] ++ (if (profile.select == "full") then (with pkgs; [
     spotify
     google-chrome
-    glxinfo
     wpsoffice-cn
     wechat-uos
     clash-verge-rev
-  ];
+  ]) else [ ]);
 
   programs.git = {
     enable = true;
@@ -58,7 +67,7 @@
     '';
   };
 
-  programs.vscode = {
+  programs.vscode = lib.mkIf (profile.select == "full") {
     enable = true;
     extensions =
       let
