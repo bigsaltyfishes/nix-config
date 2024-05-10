@@ -5,10 +5,8 @@
 
 {
   imports =
-    [ 
+    [
       (modulesPath + "/installer/scan/not-detected.nix")
-      ../../modules/hardware/graphics/intel.nix
-      ../../modules/hardware/graphics/nvidia.nix
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_usb_sdmmc" ];
@@ -17,25 +15,29 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
+    {
+      device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
       fsType = "btrfs";
       options = [ "subvol=@rootfs" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
+    {
+      device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
       fsType = "btrfs";
       options = [ "subvol=@home" ];
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/C535-407B";
+    {
+      device = "/dev/disk/by-uuid/C535-407B";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
+    {
+      device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
       fsType = "btrfs";
       options = [ "subvol=@nix" ];
     };
@@ -52,4 +54,10 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # GPU
+  molyuu.hardware.graphics.intel.enable = true;
+  molyuu.hardware.graphics.nvidia.enable = true;
+  molyuu.hardware.graphics.nvidia.with_xdriver = true;
+  molyuu.hardware.graphics.nvidia.offload.enable = true;
 }

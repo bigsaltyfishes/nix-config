@@ -8,7 +8,7 @@
   imports = [
     ../../profiles/minimum.nix
   ];
-  
+
   wsl.enable = true;
   wsl.defaultUser = "molyuu";
   wsl.nativeSystemd = true;

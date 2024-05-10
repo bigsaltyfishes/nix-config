@@ -1,10 +1,10 @@
 { config, lib, ... }:
-let 
+let
   cfg = config.programs.steam.proton-ge;
-in 
+in
 {
   options.programs.steam.proton-ge = {
-    enable = lib.mkOption  {
+    enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
       description = "Install GE Proton for Steam";
@@ -26,7 +26,7 @@ in
     environment.systemPackages = lib.mkIf cfg.enable [
       cfg.package
     ];
-    
+
     environment.sessionVariables = lib.mkIf cfg.enable {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${cfg.package}";
     };

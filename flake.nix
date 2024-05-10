@@ -49,8 +49,10 @@
             nur.nixosModules.nur
 
             ./profiles
+            ./modules/hardware/graphics
+            ./modules/hardware/kernel
             ./machines/f117-b6ck/configuration.nix
-            
+
             (import ./overlays)
 
             home-manager.nixosModules.home-manager
@@ -59,7 +61,7 @@
 
               home-manager.users.molyuu = import ./users/home/molyuu.nix;
               home-manager.extraSpecialArgs = {
-                inherit inputs; 
+                inherit inputs;
               };
             }
           ];
@@ -86,12 +88,11 @@
 
               home-manager.users.molyuu = import ./users/home/molyuu.nix;
               home-manager.extraSpecialArgs = {
-                inherit inputs; 
+                inherit inputs;
               };
             }
           ];
         };
       };
     };
-
 }

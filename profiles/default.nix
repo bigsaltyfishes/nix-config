@@ -1,10 +1,7 @@
-{ config, lib, ... }:
-let 
-  cfg = config.molyuu.system.profile;
-in 
+{ lib, ... }:
 {
   options.molyuu.system.profile = {
-    select = lib.mkOption  {
+    select = lib.mkOption {
       type = lib.types.str;
       default = "";
       description = "Molyuu's NixOS system profiles";

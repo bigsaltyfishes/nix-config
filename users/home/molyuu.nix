@@ -6,7 +6,7 @@ in
   imports = [
     ../../overlays/default.nix
   ];
-  
+
   home.username = "molyuu";
   home.homeDirectory = "/home/molyuu";
 
@@ -16,7 +16,8 @@ in
     "openssl-1.1.1w"
   ];
 
-  home.packages = with pkgs; [
+  home.packages = (with pkgs; [
+    conda
     nixd
     nixpkgs-fmt
     vim
@@ -26,13 +27,15 @@ in
     zinit
     python3
     glxinfo
-  ] ++ (if (profile.select == "full") then (with pkgs; [
-    spotify
-    google-chrome
-    wpsoffice-cn
-    wechat-uos
-    clash-verge-rev
-  ]) else [ ]);
+  ]) ++ (if (profile.select == "full") then
+    (with pkgs; [
+      spotify
+      google-chrome
+      wpsoffice-cn
+      wechat-uos
+      clash-verge-rev
+      zed-editor
+    ]) else [ ]);
 
   programs.git = {
     enable = true;
