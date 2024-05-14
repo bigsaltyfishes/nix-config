@@ -31,6 +31,7 @@ in
     (with pkgs; [
       spotify
       google-chrome
+      gparted
       wpsoffice-cn
       wechat-uos
       clash-verge-rev
