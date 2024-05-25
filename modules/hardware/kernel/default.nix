@@ -15,16 +15,16 @@ in
       type = lib.types.listOf lib.types.str;
       description = "Kernel supported filesystems";
     };
-    withGrub = lib.mkEnableOption "Install Grub bootloader";
+    grub.enable = lib.mkEnableOption "Install Grub bootloader";
   };
 
-  config = lib.mkIf cfg.enable {
-    boot.kernelPackages = cfg.package;
-    boot.supportedFilesystems = cfg.supportedFilesystems;
+  config = {
+    boot.kernelPackages = lib.mkIf cfg.enable cfg.package;
+    boot.supportedFilesystems = lib.mkIf cfg.enable cfg.supportedFilesystems;
 
-    hardware.enableAllFirmware = true;
+    hardware.enableAllFirmware = lib.mkIf cfg.enable true;
 
-    boot.loader = lib.mkIf cfg.withGrub {
+    boot.loader = lib.mkIf cfg.grub.enable {
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";

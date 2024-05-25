@@ -1,10 +1,11 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
-    ../users/molyuu.nix
+    ../users/molyuu
     ../modules/network/ntp.nix
     ../modules/locale/i18n.nix
     ../modules/security/sudo.nix
+    ../modules/programs/appimage.nix
     ../modules/programs/dev/rust-toolchains.nix
   ];
 
@@ -27,7 +28,7 @@
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
 
-    molyuu.system.profile.select = lib.mkDefault "minimum";
+    programs.nix-ld.enable = true;
 
     system.stateVersion = "23.11";
     services.sshd.enable = true;

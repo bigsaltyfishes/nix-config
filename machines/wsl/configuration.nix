@@ -12,4 +12,7 @@
   wsl.enable = true;
   wsl.defaultUser = "molyuu";
   wsl.nativeSystemd = true;
+  wsl.interop.register = true;
+
+  molyuu.home-manager.profile.extraFeatures = [ "baseDevel" ];
 }

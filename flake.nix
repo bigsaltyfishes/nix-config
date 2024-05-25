@@ -22,75 +22,63 @@
     # WSL
     NixOS-WSL.url = "github:nix-community/NixOS-WSL";
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Steam Deck
+    Jovian-NixOS.url = "github:Jovian-Experiments/Jovian-NixOS";
+    Jovian-NixOS.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , nur
-    , NixOS-WSL
-    , home-manager
-    , ...
-    } @ inputs:
+  outputs = { self, nixpkgs, nur, NixOS-WSL, Jovian-NixOS, home-manager, ... } @ inputs:
     let
       inherit (self) outputs;
+      commonModules = [
+        nur.nixosModules.nur
+        ./profiles
+        ./modules/hardware/graphics
+        ./modules/hardware/kernel
+        (import ./overlays)
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useUserPackages = true;
+          home-manager.users.molyuu = import ./users/molyuu/home;
+          home-manager.extraSpecialArgs = { inherit inputs; };
+        }
+      ];
     in
     {
-      # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
         molyuu-laptop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          # > Our main nixos configuration file <
-          modules = [
-            nur.nixosModules.nur
-
-            ./profiles
-            ./modules/hardware/graphics
-            ./modules/hardware/kernel
+          specialArgs = { inherit inputs outputs; };
+          modules = commonModules ++ [
             ./machines/f117-b6ck/configuration.nix
+          ];
+        };
 
-            (import ./overlays)
+        molyuu-steamdeck = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = commonModules ++ [
+            Jovian-NixOS.nixosModules.default
+            ./machines/steamdeck/configuration.nix
+          ];
+        };
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-
-              home-manager.users.molyuu = import ./users/home/molyuu.nix;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-            }
+        molyuu-steamdeck-livecd = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs; };
+          modules = commonModules ++ [
+            Jovian-NixOS.nixosModules.default
+            ./machines/steamdeck/livecd.nix
           ];
         };
 
         molyuu-wsl = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs outputs;
-          };
-          # > Our main nixos configuration file <
-          modules = [
-            nur.nixosModules.nur
-
-            ./profiles
+          specialArgs = { inherit inputs outputs; };
+          modules = commonModules ++ [
             ./machines/wsl/configuration.nix
             NixOS-WSL.nixosModules.wsl
-
-            (import ./overlays)
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-
-              home-manager.users.molyuu = import ./users/home/molyuu.nix;
-              home-manager.extraSpecialArgs = {
-                inherit inputs;
-              };
-            }
           ];
         };
       };

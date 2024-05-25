@@ -27,6 +27,10 @@
     intel = {
       enable = lib.mkEnableOption "Device have Intel GPU";
     };
+
+    amdgpu = {
+      enable = lib.mkEnableOption "Device have AMD GPU";
+    };
   };
 
   config.hardware.opengl = {
@@ -37,6 +41,7 @@
 
   imports = [
     ./intel.nix
+    ./amdgpu.nix
     ./nvidia.nix
   ];
 }

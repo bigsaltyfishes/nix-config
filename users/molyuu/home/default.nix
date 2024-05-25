@@ -1,10 +1,9 @@
-{ lib, pkgs, inputs, osConfig, ... }:
-let
-  profile = osConfig.molyuu.system.profile;
-in
+{ pkgs, ... }:
 {
   imports = [
-    ../../overlays/default.nix
+    ./baseDevel.nix
+    ./extraApps.nix
+    ./extraDevel.nix
   ];
 
   home.username = "molyuu";
@@ -12,31 +11,15 @@ in
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w"
-  ];
 
-  home.packages = (with pkgs; [
-    conda
-    nixd
-    nixpkgs-fmt
+  home.packages = with pkgs; [
     vim
     wget
     lshw
     neofetch
     zinit
-    python3
-    glxinfo
-  ]) ++ (if (profile.select == "full") then
-    (with pkgs; [
-      spotify
-      google-chrome
-      gparted
-      wpsoffice-cn
-      wechat-uos
-      clash-verge-rev
-      zed-editor
-    ]) else [ ]);
+    nixos-generators
+  ];
 
   programs.git = {
     enable = true;
@@ -69,23 +52,6 @@ in
           source ~/.p10k.zsh
       fi
     '';
-  };
-
-  programs.vscode = lib.mkIf (profile.select == "full") {
-    enable = true;
-    extensions =
-      let
-        inherit (inputs.nix-vscode-extensions.extensions.${pkgs.system}) vscode-marketplace;
-      in
-      with vscode-marketplace; [
-        eamodio.gitlens
-        ms-vscode.cpptools-extension-pack
-        ms-python.python
-        rust-lang.rust-analyzer
-        jnoortheen.nix-ide
-        codeium.codeium
-        ms-ceintl.vscode-language-pack-zh-hans
-      ];
   };
 
   home.stateVersion = "23.11";
