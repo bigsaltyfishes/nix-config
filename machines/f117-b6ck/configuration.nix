@@ -9,4 +9,6 @@
     ./hardware-configuration.nix
     ../../profiles/full.nix
   ];
+  
+  molyuu.desktop.pantheon.enable = true;
 }

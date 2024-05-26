@@ -30,7 +30,7 @@
 
     programs.nix-ld.enable = true;
 
-    system.stateVersion = "23.11";
+    system.stateVersion = "unstable";
     services.sshd.enable = true;
     networking.hostName = "molyuu";
 
