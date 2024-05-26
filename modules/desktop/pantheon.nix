@@ -1,22 +1,21 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.molyuu.desktop.pantheon.lightdm;
+  cfg = config.molyuu.desktop.pantheon;
 in
 {
   imports = [
     ./pipewire.nix
   ];
 
-  options.molyuu.desktop.pantheon.lightdm = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Enable LightDM";
+  options.molyuu.desktop.pantheon = {
+    enable = lib.mkEnableOption "Enable Pantheon";
+    lightdm = {
+      enable = lib.mkEnableOption "Enable LightDM";
     };
   };
 
   # Base Pantheon Desktop
-  config = {
+  config = lib.mkIf cfg.enable {
     services.xserver = {
       enable = true;
       xkb.layout = "us";
@@ -26,8 +25,8 @@ in
         monitor
       ];
       desktopManager.xterm.enable = false;
-      displayManager.lightdm.enable = lib.mkIf cfg.enable true;
-      displayManager.lightdm.greeters.pantheon.enable = lib.mkIf cfg.enable true;
+      displayManager.lightdm.enable = lib.mkIf cfg.lightdm.enable true;
+      displayManager.lightdm.greeters.pantheon.enable = lib.mkIf cfg.lightdm.enable true;
     };
 
     programs.pantheon-tweaks.enable = true;
@@ -44,11 +43,5 @@ in
         ExecStart = "${pkgs.indicator-application-gtk3}/libexec/indicator-application/indicator-application-service";
       };
     };
-
-    # Flatpak
-    services.flatpak.enable = true;
-
-    # Blueman
-    services.blueman.enable = true;
   };
 }

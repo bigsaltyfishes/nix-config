@@ -10,6 +10,8 @@
     ../../profiles/deck.nix
   ];
 
+  molyuu.desktop.pantheon.enable = true;
+
   jovian.steam.desktopSession = "pantheon";
   jovian.devices.steamdeck.enable = true;
   jovian.hardware.has.amd.gpu = true;

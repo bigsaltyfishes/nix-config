@@ -2,7 +2,7 @@
 {
   imports = [
     ./minimum.nix
-    ../modules/desktop/pantheon.nix
+    ../modules/desktop/default.nix
     ../modules/network/networkmanager.nix
     ../modules/network/bluetooth.nix
     ../modules/programs/gaming/proton-ge.nix
