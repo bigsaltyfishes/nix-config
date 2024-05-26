@@ -11,6 +11,7 @@ in
     services.udisks2.enable = true;
     systemd.user.services.auto-mount = {
       description = "Auto mount block devices";
+      wantedBy = [ "default.target" ];
       serviceConfig = {
         ExecStart =
           let
