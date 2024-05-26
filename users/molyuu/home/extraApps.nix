@@ -9,9 +9,11 @@ in
     ];
 
     home.packages = with pkgs; [
+      pavucontrol
       spotify
       google-chrome
       gparted
+      moonlight-qt
       wpsoffice-cn
       wechat-uos
       clash-verge-rev

@@ -16,13 +16,17 @@
   jovian.devices.steamdeck.enable = true;
   jovian.hardware.has.amd.gpu = true;
 
-  jovian.decky-loader.user = "molyuu";
+  services.xserver.displayManager.startx.enable = true;
+  services.libinput.enable = true;
+
   jovian.decky-loader.enable = true;
 
   environment.systemPackages = with pkgs; [
     steamdeck-firmware
     jupiter-dock-updater-bin
   ];
+
+  services.openssh.enable = true;
 
   # Extra IBus Engine for Steam Virtual Keyboard
   i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ anthy table-chinese ];

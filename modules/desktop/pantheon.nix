@@ -29,11 +29,9 @@ in
       displayManager.lightdm.greeters.pantheon.enable = lib.mkIf cfg.lightdm.enable true;
     };
 
-    programs.pantheon-tweaks.enable = true;
-
-    # App indicator
+    # App indicator and Tweaks
     environment.pathsToLink = [ "/libexec" ];
-    environment.systemPackages = with pkgs; [ indicator-application-gtk3 ];
+    environment.systemPackages = with pkgs; [ indicator-application-gtk3 pantheon-tweaks  ];
 
     systemd.user.services.indicatorapp = {
       description = "indicator-application-gtk3";
