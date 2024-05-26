@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./udisks.nix
     ./gnome.nix
     ./pantheon.nix
   ];

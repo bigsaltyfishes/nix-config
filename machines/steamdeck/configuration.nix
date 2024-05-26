@@ -22,6 +22,8 @@
   jovian.decky-loader.enable = true;
   programs.steam.cefDebug.enable = true;
 
+  molyuu.system.autoMount.enable = true;
+
   environment.systemPackages = with pkgs; [
     steamdeck-firmware
     jupiter-dock-updater-bin
