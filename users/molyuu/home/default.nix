@@ -4,6 +4,7 @@
     ./baseDevel.nix
     ./extraApps.nix
     ./extraDevel.nix
+    ./gaming.nix
   ];
 
   home.username = "molyuu";
