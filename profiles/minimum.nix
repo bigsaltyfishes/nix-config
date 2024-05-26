@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ../users/molyuu
@@ -28,6 +28,9 @@
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
 
+    environment.systemPackages = with inputs.nix-alien.packages.${pkgs.system}; [
+      nix-alien
+    ];
     programs.nix-ld.enable = true;
 
     system.stateVersion = "unstable";

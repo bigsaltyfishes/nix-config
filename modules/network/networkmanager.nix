@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   networking.wireless.enable = lib.mkForce false;
-  systemd.services.wpa_supplicant.wantedBy = lib.mkForce [ ];
+  systemd.services.wpa_supplicant.enable = lib.mkForce false;
 
   networking.networkmanager = {
     enable = true;
