@@ -1,11 +1,11 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
     ./minimum.nix
     ../modules/desktop/default.nix
     ../modules/network/networkmanager.nix
     ../modules/network/bluetooth.nix
-    ../modules/programs/gaming/proton-ge.nix
+    ../modules/programs/gaming/default.nix
   ];
 
   molyuu.home-manager.profile.extraFeatures = [ "full" ];

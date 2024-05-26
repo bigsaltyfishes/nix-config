@@ -20,6 +20,7 @@
   services.libinput.enable = true;
 
   jovian.decky-loader.enable = true;
+  programs.steam.cefDebug.enable = true;
 
   environment.systemPackages = with pkgs; [
     steamdeck-firmware
