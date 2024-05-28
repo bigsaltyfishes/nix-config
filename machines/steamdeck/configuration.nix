@@ -19,6 +19,8 @@
   services.xserver.displayManager.startx.enable = true;
   services.libinput.enable = true;
 
+  services.clash-verge.enable = true;
+
   jovian.decky-loader.enable = true;
   programs.steam.cefDebug.enable = true;
 

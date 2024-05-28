@@ -8,6 +8,7 @@
     ../modules/programs/appimage.nix
     ../modules/programs/dev/c-toolchains.nix
     ../modules/programs/dev/rust-toolchains.nix
+    ../modules/services/mihomo.nix
   ];
 
   config = {
