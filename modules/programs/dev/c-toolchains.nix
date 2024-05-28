@@ -1,4 +1,6 @@
 { pkgs, ... }:
 {
-  # TODO
+  environment.systemPackages = with pkgs; [
+    gcc
+  ];
 }

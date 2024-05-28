@@ -6,6 +6,7 @@
     ../modules/locale/i18n.nix
     ../modules/security/sudo.nix
     ../modules/programs/appimage.nix
+    ../modules/programs/dev/c-toolchains.nix
     ../modules/programs/dev/rust-toolchains.nix
   ];
 

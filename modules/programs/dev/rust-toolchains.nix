@@ -1,4 +1,9 @@
 { pkgs, ... }:
+let
+  rust = pkgs.rust-bin.stable.latest.default.override {  extensions = [ "rust-src" ];  };
+in
 {
-  environment.systemPackages = [ pkgs.rust-bin.stable.latest.default ];
+  environment.systemPackages = [
+    rust
+  ];
 }
