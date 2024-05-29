@@ -81,14 +81,6 @@ in
           auto-route: true
           auto-detect-interface: true
 
-        dns:
-          enable: true
-          listen: '127.0.0.1:9053'
-          default-nameserver: [192.168.1.1, 223.5.5.5, 223.6.6.6, 119.29.29.29]
-          enhanced-mode: fake-ip
-          nameserver: ['https://223.5.5.5/dns-query', 'https://223.6.6.6/dns-query', 'https://1.12.12.12/dns-query', 'https://120.53.53.53/dns-query']
-          fallback: ['https://101.101.101.101/dns-query', 'https://101.102.103.104/dns-query', 'https://208.67.220.2/dns-query', 'https://208.67.222.2/dns-query', 'https://9.9.9.10/dns-query', 'https://149.112.112.10/dns-query', 'https://185.222.222.222/dns-query', 'https://45.11.45.11/dns-query', 'https://9ogv2ua3.dns.nextdns.io/dns-query', 'https://s5dz31kw.dns.nextdns.io/dns-query', 'https://3xf938p8.dns.nextdns.io/dns-query', 'https://obgdkl4l.dns.nextdns.io/dns-query']
-          
         proxies:
         - name: "直连"
           type: direct
