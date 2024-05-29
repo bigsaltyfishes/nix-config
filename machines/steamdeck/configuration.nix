@@ -20,6 +20,7 @@
   services.libinput.enable = true;
 
   services.clash-verge.enable = true;
+  networking.firewall.enable = false;
 
   jovian.decky-loader.enable = true;
   programs.steam.cefDebug.enable = true;
