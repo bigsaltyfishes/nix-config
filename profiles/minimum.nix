@@ -8,7 +8,8 @@
     ../modules/programs/appimage.nix
     ../modules/programs/dev/c-toolchains.nix
     ../modules/programs/dev/rust-toolchains.nix
-    ../modules/services/mihomo.nix
+    ../modules/services/clash-verge-service.nix
+    ../modules/services/mihomo/mihomo.nix
   ];
 
   config = {

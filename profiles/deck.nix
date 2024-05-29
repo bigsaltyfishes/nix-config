@@ -6,7 +6,8 @@
     ../modules/network/networkmanager.nix
     ../modules/network/bluetooth.nix
     ../modules/programs/gaming/default.nix
-    ../modules/services/mihomo.nix
+    ../modules/services/clash-verge-service.nix
+    ../modules/services/mihomo/mihomo.nix
   ];
 
   molyuu.home-manager.profile.extraFeatures =  [ "full" ];
@@ -16,7 +17,7 @@
   jovian.steam.autoStart = true;
   jovian.steam.user = "molyuu";
 
-  services.clash-verge.enable = true;
+  molyuu.system.services.mihomo.enable = true;
 
   molyuu.desktop.pantheon.lightdm.enable = false;
   programs.steam.proton-ge.enable = true;
