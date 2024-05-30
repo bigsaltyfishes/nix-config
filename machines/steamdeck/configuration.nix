@@ -35,5 +35,5 @@
   services.openssh.enable = true;
 
   # Extra IBus Engine for Steam Virtual Keyboard
-  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ anthy table-chinese ];
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ anthy table table-chinese ];
 }
