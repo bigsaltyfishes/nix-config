@@ -6,7 +6,7 @@
     ../modules/network/networkmanager.nix
     ../modules/network/bluetooth.nix
     ../modules/programs/gaming/default.nix
-    ../modules/services/clash-verge-service.nix
+    ../modules/services/clash-verge-service/default.nix
   ];
 
   molyuu.home-manager.profile.extraFeatures =  [ "full" ];

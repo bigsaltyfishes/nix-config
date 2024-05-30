@@ -12,11 +12,15 @@ let
       hash = "sha256-RlE7GzHMph2TweMVz74q4ZKraCDVUWW3Q9OOZz1XpLA=";
     };
 
+    patches = [
+      ./molyuu.patch
+    ];
+
     nativeBuildInputs = with pkgs; [ gcc gnumake perl ];
 
     cargoBuildFlags = [ "--release" ];
 
-    cargoLock.lockFile = "${src}/Cargo.lock";
+    cargoLock.lockFile = ./Cargo.lock;
 
     meta = {
       description = "Clash Verge Service";
@@ -32,10 +36,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [ pkgs.mihomo ];
     systemd.services.clash-verge-service = {
       description = "Clash Verge Service helps to launch Clash Core.";
       after = [ "network-online.target" "nftables.service" "iptables.service" ];
       wantedBy = [ "multi-user.target" ];
+      environment = {
+        "CUSTOM_MIHOMO_BINARY" = "${pkgs.mihomo}/bin/mihomo";
+      };
       serviceConfig = {
         ExecStart = "${clash-verge-service}/bin/clash-verge-service";
         Restart = "always";
