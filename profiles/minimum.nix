@@ -39,6 +39,8 @@
     services.sshd.enable = true;
     networking.hostName = "molyuu";
 
+    services.clash-verge.enable = true;
+
     programs.zsh.enable = true;
   };
 }
