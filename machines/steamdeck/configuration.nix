@@ -2,36 +2,43 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
-    ../../profiles/deck.nix
   ];
 
-  molyuu.desktop.pantheon.enable = true;
-
-  jovian.steam.desktopSession = "pantheon";
-  jovian.devices.steamdeck.enable = true;
-  jovian.hardware.has.amd.gpu = true;
-
-  services.xserver.displayManager.startx.enable = true;
-  services.libinput.enable = true;
+  molyuu.system.profiles = [ "pc" "gaming" ];
 
   services.clash-verge.enable = true;
 
-  jovian.decky-loader.enable = true;
-  programs.steam.cefDebug.enable = true;
+  environment.systemPackages = [
+    (pkgs.steamdeck-firmware or null)
+    (pkgs.jupiter-dock-updater-bin or null)
+  ];
+
+  molyuu.hardware.kernel.enable = lib.mkForce false;
 
   molyuu.system.autoMount.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    steamdeck-firmware
-    jupiter-dock-updater-bin
-  ];
+  services.libinput.enable = true;
+  services.xserver.displayManager.startx.enable = true;
+  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
 
-  services.openssh.enable = true;
+  jovian = {
+    steam = {
+      desktopSession = "pantheon";
+      enable = true;
+      autoStart = true;
+      user = "molyuu";
+    };
+    devices.steamdeck.enable = true;
+    decky-loader.enable = true;
+    hardware.has.amd.gpu = true;
+  };
+
+  programs.steam.cefDebug.enable = true;
 
   # Extra IBus Engine for Steam Virtual Keyboard
   i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ anthy table table-chinese ];

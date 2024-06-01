@@ -5,5 +5,8 @@ in
 {
   environment.systemPackages = [
     rust
-  ];
+  ] ++ (with pkgs; [
+    gcc
+    gnumake
+  ]);
 }

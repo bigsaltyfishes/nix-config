@@ -16,12 +16,12 @@ in
     };
   };
 
-  config = {
-    environment.systemPackages = lib.mkIf cfg.enable [
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = [
       cfg.package
     ];
 
-    environment.sessionVariables = lib.mkIf cfg.enable {
+    environment.sessionVariables = {
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${cfg.package}";
     };
   };

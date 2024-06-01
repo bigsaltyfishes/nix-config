@@ -1,10 +1,12 @@
-{ lib, ... }:
+{ config, lib, ... }:
+let
+  cfg = config.molyuu.system.network;
+in
 {
-  networking.wireless.enable = lib.mkForce false;
-  systemd.services.wpa_supplicant.enable = lib.mkForce false;
-
-  networking.networkmanager = {
-    enable = true;
-    wifi.backend = "iwd";
+  config = lib.mkIf cfg.enable {
+    networking.networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
   };
 }

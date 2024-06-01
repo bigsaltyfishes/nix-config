@@ -36,9 +36,9 @@
       inherit (self) outputs;
       commonModules = [
         nur.nixosModules.nur
+        ./users
         ./profiles
-        ./modules/hardware/graphics
-        ./modules/hardware/kernel
+        ./modules
         (import ./overlays)
         home-manager.nixosModules.home-manager
         {
