@@ -17,7 +17,7 @@
     vim
     wget
     lshw
-    neofetch
+    fastfetch
     zinit
     nixos-generators
   ];
