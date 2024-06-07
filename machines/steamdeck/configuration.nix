@@ -41,5 +41,5 @@
   programs.steam.cefDebug.enable = true;
 
   # Extra IBus Engine for Steam Virtual Keyboard
-  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ anthy table table-chinese ];
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ anthy table table-cangjie-lite ];
 }
