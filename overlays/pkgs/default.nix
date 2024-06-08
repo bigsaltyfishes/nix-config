@@ -1,6 +1,8 @@
 { inputs, ... }:
 {
   imports = [
+    ./pyzy
+    ./ibus-pinyin
     ./ibus-chinese-tables
     ./zinit
   ];
