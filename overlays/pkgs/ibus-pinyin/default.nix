@@ -22,16 +22,9 @@
             lua
             glib
             sqlite
-            (python3.withPackages (pypkgs: with pypkgs; [
-              pygobject3
-              (toPythonModule ibus)
-            ]))
+            python3
             gtk3
-            db
             lua
-            opencc
-            libsoup_3
-            json-glib
           ];
 
           version = "1.5.1";
