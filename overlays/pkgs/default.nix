@@ -5,6 +5,7 @@
     ./ibus-pinyin
     ./ibus-chinese-tables
     ./zinit
+    ./steam-im-modules
   ];
   
   nixpkgs.overlays = [

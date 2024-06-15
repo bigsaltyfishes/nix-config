@@ -16,6 +16,7 @@
   environment.systemPackages = [
     (pkgs.steamdeck-firmware or null)
     (pkgs.jupiter-dock-updater-bin or null)
+    pkgs.steam-im-modules
   ];
 
   molyuu.hardware.kernel.enable = lib.mkForce false;
