@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.programs.steam.proton-ge;
 in
@@ -11,18 +11,14 @@ in
     };
     package = lib.mkOption {
       type = lib.types.package;
-      default = config.nur.repos.ataraxiasjel.proton-ge;
-      description = "GE Protonpackage to use.";
+      default = pkgs.proton-ge-bin;
+      description = "GE Proton package to use.";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [
+    programs.steam.extraCompatPackages = [
       cfg.package
     ];
-
-    environment.sessionVariables = {
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "${cfg.package}";
-    };
   };
 }
