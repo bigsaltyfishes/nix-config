@@ -32,20 +32,20 @@ stdenv.mkDerivation {
   nativeBuildInputs = [
     autoreconfHook
     gettext
+    intltool
     pkg-config
+    python3
+    sqlite
     wrapGAppsHook3
   ];
 
   buildInputs = [
     ibus
     pyzy
-    intltool
     lua
     glib
     sqlite
-    python3
     gtk3
-    lua
   ];
 
   meta = with lib; {
