@@ -6,7 +6,7 @@
     description = ''
       List of features to enable in the system configuration.
     '';
-    example = [ "pc" "gamimg" ];
+    example = [ "pc" "gaming" ];
   };
 
   imports = [
