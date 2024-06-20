@@ -16,14 +16,10 @@
 
   fonts = {
     packages = (with pkgs; [
-      noto-fonts
-      noto-fonts-cjk
+      sarasa-gothic
       noto-fonts-emoji
-      source-code-pro
-      source-han-mono
       source-han-sans
       source-han-serif
-      hack-font
       jetbrains-mono
       nerdfonts
     ]) ++ [ config.nur.repos.rewine.ttf-wps-fonts ];
@@ -32,25 +28,18 @@
       defaultFonts = {
         emoji = [ "Noto Color Emoji" ];
         monospace = [
-          "Noto Sans Mono CJK SC"
           "Sarasa Mono SC"
-          "DejaVu Sans Mono"
         ];
         sansSerif = [
-          "Noto Sans CJK SC"
           "Source Han Sans SC"
-          "DejaVu Sans"
         ];
         serif = [
-          "Noto Serif CJK SC"
           "Source Han Serif SC"
-          "DejaVu Serif"
         ];
       };
+      cache32Bit = true;
     };
   };
 
-  programs.steam.fontPackages = with pkgs; [
-    noto-fonts-cjk
-  ];
+  programs.steam.fontPackages = with pkgs; [ source-han-sans ];
 }
