@@ -50,7 +50,7 @@
     };
   };
 
-  programs.steam.extraPackages = with pkgs; [
+  programs.steam.fontPackages = with pkgs; [
     noto-fonts-cjk
   ];
 }
