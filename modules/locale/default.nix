@@ -40,6 +40,4 @@
       cache32Bit = true;
     };
   };
-
-  programs.steam.fontPackages = with pkgs; [ source-han-sans ];
 }
