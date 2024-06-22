@@ -24,7 +24,7 @@
     NixOS-WSL.inputs.nixpkgs.follows = "nixpkgs";
 
     # Steam Deck
-    Jovian-NixOS.url = "github:Jovian-Experiments/Jovian-NixOS";
+    Jovian-NixOS.url = "github:bigsaltyfishes/Jovian-NixOS";
     Jovian-NixOS.inputs.nixpkgs.follows = "nixpkgs";
 
     # Extra

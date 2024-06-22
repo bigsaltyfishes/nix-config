@@ -33,10 +33,9 @@
     };
   };
 
-  config.hardware.opengl = {
+  config.hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   imports = [

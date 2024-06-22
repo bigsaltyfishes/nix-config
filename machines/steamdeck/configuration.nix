@@ -16,7 +16,6 @@
   environment.systemPackages = [
     (pkgs.steamdeck-firmware or null)
     (pkgs.jupiter-dock-updater-bin or null)
-    pkgs.steam-im-modules
   ];
 
   molyuu.hardware.kernel.enable = lib.mkForce false;
@@ -33,6 +32,10 @@
       enable = true;
       autoStart = true;
       user = "molyuu";
+      inputMethod = {
+        enable = true;
+        methods = [ "pinyin" ];
+      };
     };
     devices.steamdeck.enable = true;
     decky-loader.enable = true;
@@ -40,7 +43,4 @@
   };
 
   programs.steam.cefDebug.enable = true;
-
-  # Extra IBus Engine for Steam Virtual Keyboard
-  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ anthy table table-cangjie-lite pinyin ];
 }
