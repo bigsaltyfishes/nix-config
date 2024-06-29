@@ -38,7 +38,26 @@
       };
     };
     devices.steamdeck.enable = true;
-    decky-loader.enable = true;
+    decky-loader = {
+      enable = true;
+      extraPackages = with pkgs; [
+        curl
+        unzip
+        util-linux
+        gnugrep
+
+        readline.out
+        procps
+        pciutils
+        libpulseaudio
+
+        ryzenadj
+        kmod
+      ];
+      extraPythonPackages = pythonPackages: with pythonPackages; [
+        pyyaml
+      ];
+    };
     hardware.has.amd.gpu = true;
   };
 
