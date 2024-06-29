@@ -22,8 +22,9 @@ in
                   ${pkgs.systemd}/bin/udevadm info -p /sys/"$1" | ${pkgs.gawk}/bin/awk -v FS== '/DEVNAME/ {print $2}'
               }
 
-              # Mount all currently connected storage devices
-              for dev in /dev/sd* /dev/mmcblk* /dev/nvme*; do
+              # Remount all currently connected storage devices
+              for dev in /dev/sd* /dev/mmcblk*; do
+                  ${pkgs.udisks}/bin/udisksctl unmount --block-device "$dev" --no-user-interaction || true
                   ${pkgs.udisks}/bin/udisksctl mount --block-device "$dev" --no-user-interaction
               done
 
