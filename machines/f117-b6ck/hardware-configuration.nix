@@ -28,12 +28,12 @@
       options = [ "compress=zstd" "subvol=@home" ];
     };
 
-    fileSystems."/var/lib/swap" =
-      {
-        device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
-        fsType = "btrfs";
-        options = [ "subvol=@swap" ];
-      };
+  fileSystems."/var/lib/swap" =
+    {
+      device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
+      fsType = "btrfs";
+      options = [ "subvol=@swap" ];
+    };
 
   fileSystems."/boot/efi" =
     {
@@ -51,8 +51,8 @@
 
   swapDevices = [
     {
-        device = "/var/lib/swap/swapfile";
-        size = 4*1024;
+      device = "/var/lib/swap/swapfile";
+      size = 4 * 1024;
     }
   ];
 
@@ -72,4 +72,7 @@
   molyuu.hardware.graphics.nvidia.enable = true;
   molyuu.hardware.graphics.nvidia.with_xdriver = true;
   molyuu.hardware.graphics.nvidia.offload.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
 }

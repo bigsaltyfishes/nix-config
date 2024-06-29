@@ -8,7 +8,6 @@ in
     molyuu.hardware.kernel.grub.enable = true;
     
     molyuu.system.network.enable = true;
-    molyuu.system.network.bluetooth.enable = true;
     molyuu.system.network.ntp.enable = true;
 
     molyuu.desktop.pantheon.enable = true;

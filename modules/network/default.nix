@@ -5,9 +5,6 @@ in
 {
   options.molyuu.system.network = {
     enable = lib.mkEnableOption "Enable Network Support";
-    bluetooth = {
-      enable = lib.mkEnableOption "Enable Bluetooth";
-    };
     ntp = {
       enable = lib.mkEnableOption "Enable NTP service";
     };
@@ -20,7 +17,6 @@ in
   };
 
   imports = [
-    ./bluetooth.nix
     ./networkmanager.nix
   ];
 }

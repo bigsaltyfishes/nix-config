@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
@@ -14,39 +15,44 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
+    {
+      device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
       fsType = "btrfs";
       options = [ "subvol=@rootfs" "compress=zstd" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
+    {
+      device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
       fsType = "btrfs";
       options = [ "subvol=@home" "compress=zstd" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
+    {
+      device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
       fsType = "btrfs";
       options = [ "subvol=@nix" "noatime" "compress=zstd" ];
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/0F72-64B8";
+    {
+      device = "/dev/disk/by-uuid/0F72-64B8";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   fileSystems."/var/lib/swap" =
-    { device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
+    {
+      device = "/dev/disk/by-uuid/be11a237-ceb1-46a4-aaf7-1c5c928d3821";
       fsType = "btrfs";
       options = [ "subvol=@swap" ];
     };
 
-  swapDevices = [ 
+  swapDevices = [
     {
       device = "/var/lib/swap/swapfile";
-      size = 4*1024;
+      size = 4 * 1024;
     }
   ];
 
@@ -59,4 +65,31 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  # Disable HFP/HSP profiles
+  environment.etc."wireplumber/wireplumber.conf.d/50-bluez.conf".text = ''
+    monitor.bluez.rules = [
+      {
+        matches = [
+          {
+            ## This matches all bluetooth devices.
+            device.name = "~bluez_card.*"
+          }
+        ]
+        actions = {
+          update-props = {
+            bluez5.auto-connect = [ a2dp_sink ]
+            bluez5.hw-volume = [ a2dp_sink ]
+          }
+        }
+      }
+    ]
+
+    monitor.bluez.properties = {
+      bluez5.roles = [ a2dp_sink ]
+      bluez5.hfphsp-backend = "none"
+    }
+  '';
 }
