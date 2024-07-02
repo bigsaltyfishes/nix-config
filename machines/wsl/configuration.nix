@@ -14,5 +14,7 @@
   wsl.nativeSystemd = true;
   wsl.interop.register = true;
 
+  virtualisation.docker.storageDriver = "overlay2";
+
   molyuu.home-manager.profile.extraFeatures = [ "baseDevel" ];
 }

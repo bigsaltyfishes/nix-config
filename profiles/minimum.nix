@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 {
   config = {
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -33,6 +33,15 @@
       offset = 0;
       mask = ''\xff\xff\xff\xff\x00\x00\x00\x00\xff\xff\xff'';
       magicOrExtension = ''\x7fELF....AI\x02'';
+    };
+
+    virtualisation.docker = {
+      enable = true;
+      storageDriver = lib.mkDefault "btrfs";
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
     };
 
     system.stateVersion = "unstable";
