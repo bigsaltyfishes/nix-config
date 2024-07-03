@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, system, ... }:
+{ inputs, pkgs, lib, ... }:
 {
   config = {
     environment.systemPackages = (with inputs.nix-alien.packages.${pkgs.system}; [

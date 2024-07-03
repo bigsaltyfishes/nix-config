@@ -1,6 +1,6 @@
 { ... }:
 {
   imports = [
-    ./os-specific
+    ./locale
   ];
 }
