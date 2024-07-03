@@ -17,7 +17,6 @@
   home.packages = with pkgs; [
     vim
     wget
-    lshw
     fastfetch
     zinit
     nixos-generators
