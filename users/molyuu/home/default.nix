@@ -1,14 +1,15 @@
-{ pkgs, ... }:
+{ pkgs, lib, system, ... }:
 {
   imports = [
     ./baseDevel.nix
-    ./extraApps.nix
     ./extraDevel.nix
+  ] ++ (lib.optionals (system == "x86_64-linux") [
+    ./extraApps.nix
     ./gaming.nix
-  ];
+  ]);
 
   home.username = "molyuu";
-  home.homeDirectory = "/home/molyuu";
+  home.homeDirectory = if (system == "x86_64-darwin") then "/Users/molyuu" else "/home/molyuu";
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;

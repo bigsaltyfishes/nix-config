@@ -1,6 +1,6 @@
-{ ... }:
+{ lib, system, ... }:
 {
-  imports = [
+  imports = lib.optionals (system == "x86_64-linux") [
     ./programs
     ./network
     ./locale
