@@ -41,6 +41,7 @@
     decky-loader = {
       enable = true;
       user = "molyuu";
+      enableFHSEnvironment = true;
       extraPackages = with pkgs; [
         curl
         unzip
