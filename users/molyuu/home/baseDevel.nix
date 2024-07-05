@@ -8,6 +8,9 @@ in
       nixd
       nixpkgs-fmt
       python3
+      rust-toolchains
+      gcc
+      gnumake
     ];
   };
 }

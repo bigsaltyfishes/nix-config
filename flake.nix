@@ -57,6 +57,7 @@
       linuxHomeManager = system: [
         home-manager.nixosModules.home-manager
         {
+          home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.molyuu = import ./users/molyuu/home;
           home-manager.extraSpecialArgs = { inherit inputs system; };
@@ -65,6 +66,7 @@
       darwinHomeManager = system: [
         home-manager.darwinModules.home-manager
         {
+          home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.molyuu = import ./users/molyuu/home;
           home-manager.extraSpecialArgs = { inherit inputs system; };

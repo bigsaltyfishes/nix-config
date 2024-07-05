@@ -11,9 +11,6 @@
   home.username = "molyuu";
   home.homeDirectory = if (system == "x86_64-darwin") then "/Users/molyuu" else "/home/molyuu";
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowBroken = true;
-
   home.packages = with pkgs; [
     vim
     wget

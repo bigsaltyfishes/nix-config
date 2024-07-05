@@ -9,8 +9,7 @@
 
     services.sshd.enable = true;
     services.resolved.enable = true;
-
-    programs.zsh.enable = true;
+    
     programs.nix-ld.enable = true;
 
     boot.binfmt.registrations.appimage = {

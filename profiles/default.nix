@@ -9,6 +9,10 @@
     example = [ "pc" "gaming" ];
   };
 
+  config = {
+    programs.zsh.enable = true;
+  };
+
   imports = [
     ./nix-config.nix
   ] ++ (lib.optionals (system == "x86_64-linux") [

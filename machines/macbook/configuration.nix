@@ -5,5 +5,5 @@
 { ... }:
 
 {  
-  molyuu.system.profiles = [ "darwin" ];
+  molyuu.system.profiles = [ "pc" ];
 }

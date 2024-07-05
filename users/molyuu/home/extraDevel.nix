@@ -8,10 +8,6 @@ in
   ];
 
   config = lib.mkIf (lib.elem "extraDevel" profile.extraFeatures || lib.elem "full" profile.extraFeatures) {
-    home.packages = with pkgs; [
-      zed-editor
-    ];
-
     programs.vscode = {
       enable = true;
       extensions =

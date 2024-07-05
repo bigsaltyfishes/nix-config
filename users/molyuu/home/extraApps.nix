@@ -4,10 +4,6 @@ let
 in
 {
   config = lib.mkIf (lib.elem "extraApps" profile.extraFeatures || lib.elem "full" profile.extraFeatures) {
-    nixpkgs.config.permittedInsecurePackages = [
-      "openssl-1.1.1w"
-    ];
-
     home.packages = with pkgs; [
       pavucontrol
       spotify

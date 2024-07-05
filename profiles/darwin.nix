@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, system, ... }:
 let
   cfg = config.molyuu.system.profiles;
 in
@@ -7,14 +7,13 @@ in
     homebrew = {
       enable = true;
       casks = [
-        "clash-verge-rev"
         "spotify"
         "google-chrome"
         "warp"
-        "wechat"
-        "qq"
       ];
     };
+    services.nix-daemon.enable = true;
+    nixpkgs.hostPlatform = system;
     molyuu.home-manager.profile.extraFeatures = [ "baseDevel" "extraDevel" ];
     system.stateVersion = 4;
   };
