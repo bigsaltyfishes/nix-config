@@ -40,6 +40,7 @@
     devices.steamdeck.enable = true;
     decky-loader = {
       enable = true;
+      user = "molyuu";
       extraPackages = with pkgs; [
         curl
         unzip
