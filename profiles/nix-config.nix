@@ -10,7 +10,7 @@
   };
 
   nix.settings.auto-optimise-store = true;
-  nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" "https://cache.nixos.org/" ];
+  nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://cache.nixos.org/" ];
   nixpkgs = {
     config = {
       allowUnfree = true;
