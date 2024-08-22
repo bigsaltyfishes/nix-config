@@ -21,6 +21,11 @@
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
 
+    molyuu.system.binfmt = {
+      enable = true;
+      emulatedSystems = [ "aarch64-linux" ];
+    };
+
     virtualisation.docker = {
       enable = true;
       storageDriver = lib.mkDefault "btrfs";
