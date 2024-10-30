@@ -8,13 +8,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ clash-verge-service ];
     systemd.services.clash-verge-service = {
       description = "Clash Verge Service helps to launch Clash Core.";
       after = [ "network-online.target" "nftables.service" "iptables.service" ];
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
-        ExecStart = "${pkgs.clash-verge-service}/bin/clash-verge-service";
+        ExecStart = "${pkgs.clash-verge-rev}/bin/clash-verge-service";
         Restart = "always";
         RestartSec = "5";
         Type = "simple";
