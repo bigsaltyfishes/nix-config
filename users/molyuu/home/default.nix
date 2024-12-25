@@ -12,6 +12,7 @@
   home.homeDirectory = if (system == "x86_64-darwin") then "/Users/molyuu" else "/home/molyuu";
 
   home.packages = with pkgs; [
+    gh
     vim
     wget
     fastfetch
