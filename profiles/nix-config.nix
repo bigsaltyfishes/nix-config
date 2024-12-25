@@ -10,7 +10,8 @@
   };
 
   nix.settings.auto-optimise-store = true;
-  nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://cache.nixos.org/" ];
+  nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://cache.nixos.org/" "https://jovian-nixos.cachix.org/" ];
+  nix.settings.trusted-public-keys = [ "jovian-nixos.cachix.org-1:mAWLjAxLNlfxAnozUjOqGj4AxQwCl7MXwOfu7msVlAo=" ];
   nixpkgs = {
     config = {
       allowUnfree = true;

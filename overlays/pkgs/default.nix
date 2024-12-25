@@ -1,6 +1,7 @@
 { inputs, lib, system, ... }:
 {
   nixpkgs.overlays = [
+    inputs.nur.overlays.default
     inputs.rust-overlay.overlays.default
     (final: super: {
       zinit = final.callPackage ./zinit { inherit super;};

@@ -48,7 +48,7 @@
     let
       inherit (self) outputs;
       commonModules = [
-        nur.nixosModules.nur
+        nur.modules.nixos.default
         ./users
         ./profiles
         ./modules

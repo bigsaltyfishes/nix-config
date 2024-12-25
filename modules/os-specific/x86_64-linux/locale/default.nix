@@ -16,14 +16,15 @@
   time.timeZone = "Asia/Shanghai";
 
   fonts = {
-    packages = (with pkgs; [
+    packages = with pkgs; [
       sarasa-gothic
       noto-fonts-emoji
       source-han-sans
       source-han-serif
       jetbrains-mono
-      nerdfonts
-    ]) ++ [ config.nur.repos.rewine.ttf-wps-fonts ];
+      nerd-fonts.meslo-lg
+      nur.repos.rewine.ttf-wps-fonts
+    ];
 
     fontconfig = {
       defaultFonts = {
