@@ -10,9 +10,8 @@
   };
 
   nix.settings.auto-optimise-store = true;
-  nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://cache.nixos.org/" "https://jovian-nixos.cachix.org/" ];
-  nix.settings.trusted-public-keys = [ "jovian-nixos.cachix.org-1:mAWLjAxLNlfxAnozUjOqGj4AxQwCl7MXwOfu7msVlAo=" ];
-  nix.settings.trusted-users = [ "molyuu" ];
+  nix.settings.substituters = [ "https://mirror.sjtu.edu.cn/nix-channels/store" "https://cache.nixos.org/" "https://hyprland.cachix.org" ];
+  nix.settings.trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   nixpkgs = {
     config = {
       allowUnfree = true;

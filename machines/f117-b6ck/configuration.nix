@@ -9,5 +9,6 @@
     ./hardware-configuration.nix
   ];
   
+  molyuu.desktop.pantheon.enable = true;
   molyuu.system.profiles = [ "pc" "gaming" ];
 }

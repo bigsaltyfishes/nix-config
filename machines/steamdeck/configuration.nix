@@ -22,6 +22,8 @@
 
   molyuu.system.autoMount.enable = true;
 
+  molyuu.desktop.pantheon.enable = true;
+  
   services.libinput.enable = true;
   services.xserver.displayManager.startx.enable = true;
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;

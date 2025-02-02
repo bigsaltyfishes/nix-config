@@ -31,6 +31,28 @@
     Jovian-NixOS.url = "github:bigsaltyfishes/Jovian-NixOS";
     Jovian-NixOS.inputs.nixpkgs.follows = "nixpkgs";
 
+    # AGS
+    ags.url = "github:Aylur/ags/v1";
+    ags.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Anyrun
+    anyrun.url = "github:Kirottu/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
+    hyprland-plugins.inputs.hyprland.follows = "hyprland";
+
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Icons
+    more-waita = {
+      url = "github:somepaulo/MoreWaita";
+      flake = false;
+    };
+    
     # Extra
     nix-alien.url = "github:thiagokokada/nix-alien";
   };
@@ -51,8 +73,7 @@
         nur.modules.nixos.default
         ./users
         ./profiles
-        ./modules
-        (import ./overlays)
+        ./modules/system
       ];
       linuxHomeManager = system: [
         home-manager.nixosModules.home-manager
@@ -60,6 +81,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.molyuu = import ./users/molyuu/home;
+          home-manager.backupFileExtension = "_bak";
           home-manager.extraSpecialArgs = { inherit inputs system; };
         }
       ];
@@ -84,6 +106,14 @@
         };
       };
       nixosConfigurations = {
+        molyuu-desktop = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs outputs system; };
+          modules = commonModules ++ (linuxHomeManager system) ++ [
+            ./machines/desktop/configuration.nix
+          ];
+        };
+
         molyuu-laptop = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           specialArgs = { inherit inputs outputs system; };
