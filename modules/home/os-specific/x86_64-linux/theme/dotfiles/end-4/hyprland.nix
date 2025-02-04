@@ -10,7 +10,6 @@ in
     services.hypridle.enable = true;
     home.packages = with pkgs; [
       easyeffects
-      gnome-keyring
       gnome-control-center
       gnome-tweaks
     ];

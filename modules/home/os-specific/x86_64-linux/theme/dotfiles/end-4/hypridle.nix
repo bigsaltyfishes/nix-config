@@ -8,7 +8,7 @@ in
       enable = true;
       settings = {        
         general = {
-          lock-cmd = "pidof hyprlock || hyprlock";
+          lock_cmd = "pidof hyprlock || hyprlock";
           before_sleep_cmd = "loginctl lock-session";
         };
 

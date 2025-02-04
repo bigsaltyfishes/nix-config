@@ -26,6 +26,7 @@ in
     ./kitty.nix
     ./packages.nix
     ./wlogout.nix
+    ./zsh.nix
   ];
 
   config = lib.mkIf enabled {

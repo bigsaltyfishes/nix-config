@@ -21,7 +21,7 @@ in
         }
         {
           "label" = "logout";
-          "action" = "pkill Hyprland || pkill sway || pkill niri || loginctl terminate-user $USER";
+          "action" = "loginctl kill-session $XDG_SESSION_ID";
           "text" = "logout";
           "keybind" = "e";
         }
