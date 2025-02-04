@@ -114,34 +114,26 @@ in
         };
         decoration = {
           rounding = 20;
+          active_opacity = 1.0;
+          inactive_opacity = 0.8;
+          fullscreen_opacity = 1.0;
 
           blur = {
             enabled = true;
+            size = 6;
+            passes = 2;
+            new_optimizations = "on";
+            ignore_opacity = true;
             xray = true;
-            special = false;
-            new_optimizations = true;
-            size = 14;
-            passes = 4;
-            brightness = 1;
-            noise = 0.01;
-            contrast = 1;
-            popups = true;
-            popups_ignorealpha = 0.6;
           };
+          
           # Shadow
           shadow = {
-              enabled = true;
-              ignore_window = true;
-              range = 20;
-              offset = "0 2";
-              render_power = 4;
-              color = "rgba(0000002A)";
+            enabled = true;
+            range = 30;
+            render_power = 3;
+            color = "0x66000000";
           };
-
-          # Dim
-          dim_inactive = false;
-          dim_strength = 0.1;
-          dim_special = 0;
         };
         animations = {
           enabled = true;
@@ -325,7 +317,7 @@ in
             "Super+Shift, Up, movewindow, u"
             "Super+Shift, W, exec, wps"
             ''
-            Super, Slash, exec, for ((i=0; i<$(hyprctl monitors -j | jq length); i++)); do ags -t"cheatsheet""$i"; done
+            Super, Slash, exec, for ((i=0; i<$(hyprctl monitors -j | jq length); i++)); do ags -t "cheatsheet""$i"; done
             ''
             "Super, S, togglespecialworkspace, "
             "Super, Tab, exec, ags -t 'overview'"
@@ -409,7 +401,6 @@ in
           ''
           immediate,.*\.exe
           ''
-          "noblur,.*"
         ];
         windowrulev2 = [
           "float, title:^(Picture(-| )in(-| )[Pp]icture)$"
@@ -488,7 +479,7 @@ in
 
       plugins = with plugins; [
         hyprexpo
-        hyprbars
+        #hyprbars
       ];
     };
 
