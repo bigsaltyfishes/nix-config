@@ -1,36 +1,17 @@
 { config, lib, inputs, pkgs, ... }:
 let
   enabled = config.molyuu.home-manager.theme.dotfile == "end-4";
-  status = pkgs.writeShellScriptBin "hyprlock-status" ''
-    #!/${pkgs.bash}/bin/bash
-    
-    ############ Variables ############
-    enable_battery=false
-    battery_charging=false
+  hyprlock-background = pkgs.writeShellScriptBin "hyprlock-background" ''
+    #!${pkgs.bash}/bin/bash
 
-    ####### Check availability ########
-    for battery in /sys/class/power_supply/*BAT*; do
-      if [[ -f "$battery/uevent" ]]; then
-        enable_battery=true
-        if [[ $(cat /sys/class/power_supply/*/status | head -1) == "Charging" ]]; then
-          battery_charging=true
-        fi
-        break
-      fi
-    done
+    # Find current background image path
+    image_path=$(swww query | awk -F 'image: ' '{print $2}')
 
-    ############# Output #############
-    if [[ $enable_battery == true ]]; then
-      if [[ $battery_charging == true ]]; then
-        echo -n "(+) "
-      fi
-      echo -n "$(cat /sys/class/power_supply/*/capacity | head -1)"%
-      if [[ $battery_charging == false ]]; then
-        echo -n " remaining"
-      fi
+    if [ -f "$image_path" ]; then
+      rm -f /tmp/hyprlock-background.jpg
+      ${pkgs.imagemagick}/bin/convert "$image_path" /tmp/hyprlock-background.jpg
     fi
-
-    echo ""
+    wait && hyprlock
   '';
   text_color = "rgba(FFFFFFFF)";
   entry_background_color = "rgba(33333311)";
@@ -42,102 +23,81 @@ let
 in
 {
   config = lib.mkIf enabled {
+    home.packages = with pkgs; [
+      hyprlock-background
+    ];
     programs.hyprlock = {
       enable = true;
       settings = {
         background = [
           {
-            color = "rgba(000000FF)";
+            monitor = "";
+            path = "/tmp/hyprlock-background.jpg";
+            blur_passes = 0;
+            contrast = 0.8916;
+            brightness = 0.8172;
+            vibrancy = 0.1696;
+            vibrancy_darkness = 0.0;
+          }
+        ];
+
+        general = {
+          # no_fade_in = true;
+          hide_cursor = true;
+          grace = 0;
+        };
+
+        label = [
+          {
+            monitor = "";
+            text = "cmd[update:1000] echo \"<span>$(date +\"%H\")</span>\"";
+            color = "rgba(255, 255, 255, 1)";
+            font_size = 250;
+            font_family = "Alfa Slab One";
+            position = "-80, 290";
+            halign = "center";
+            valign = "center";
+          }
+          {
+            monitor = "";
+            text = "cmd[update:1000] echo \"<span>$(date +\"%M\")</span>\"";
+            color = "rgba(147, 196, 255, 1)";
+            font_size = 250;
+            font_family = "Alfa Slab One";
+            position = "10, 70";
+            halign = "center";
+            valign = "center";
+          }
+          {
+            monitor = "";
+            text = "cmd[update:1000] echo -e \"$(date +\"%B%d日 %A\" | sed 's/0/〇/g; s/1/一/g; s/2/二/g; s/3/三/g; s/4/四/g; s/5/五/g; s/6/六/g; s/7/七/g; s/8/八/g; s/9/九/g')\"";
+            color = "rgba(255, 255, 255, 1)";
+            font_size = 22;
+            font_family = "Source Han Serif SC Bold";
+            position = "0, -150";
+            halign = "center";
+            valign = "center";
           }
         ];
 
         input-field = [
           {
             monitor = "";
-            size = "250, 50";
-            outline_thickness = 2;
+            size = "250, 60";
+            outline_thickness = 0;
+            outer_color = "rgba(21, 21, 21, 0.95)";
             dots_size = 0.1;
-            dots_spacing = 0.3;
-            outer_color = entry_border_color;
-            inner_color = entry_background_color;
-            font_color = entry_color;
-
-            position = "0, 20";
+            dots_spacing = 1;
+            dots_center = true;
+            inner_color = "rgba(21, 21, 21, 0.95)";
+            font_color = "rgba(200, 200, 200, 1)";
+            fade_on_empty = false;
+            placeholder_text = "<span face=\"Cascadia Code NF\" foreground=\"##8da3b9\"> $USER</span>";
+            hide_input = false;
+            position = "0, -290";
             halign = "center";
             valign = "center";
-          }
-        ];
-
-        label = [
-          # Clock
-          {
-            monitor = "";
-            text = "$TIME";
-            shadow_passes = 1;
-            shadow_boost = 0.5;
-            color = text_color;
-            font_size = 65;
-            font_family = font_family_clock;
-
-            position = "0, 300";
-            halign = "center";
-            valign = "center";
-          }
-          # Greeting
-          {
-            monitor = "";
-            text = "hi $USER !!!";
-            shadow_passes = 1;
-            shadow_boost = 0.5;
-            color = text_color;
-            font_size = 20;
-            font_family = font_family;
-
-            position = "0, 240";
-            halign = "center";
-            valign = "center";
-          }
-          # lock icon
-          {
-            monitor = "";
-            text = "lock";
-            shadow_passes = 1;
-            shadow_boost = 0.5;
-            color = text_color;
-            font_size = 21;
-            font_family = font_material_symbols;
-
-            position = "0, 65";
-            halign = "center";
-            valign = "bottom";
-          }
-          # "locked" text
-          {
-            monitor = "";
-            text = "locked";
-            shadow_passes = 1;
-            shadow_boost = 0.5;
-            color = text_color;
-            font_size = 14;
-            font_family = font_family;
-
-            position = "0, 45";
-            halign = "center";
-            valign = "bottom";
-          }
-          # Status
-          {
-            monitor = "";
-            text = "cmd[update:5000] ${status}/bin/hyprlock-status";
-            shadow_passes = 1;
-            shadow_boost = 0.5;
-            color = text_color;
-            font_size = 14;
-            font_family = font_family;
-
-            position = "30, -30";
-            halign = "left";
-            valign = "top";
+            zindex = 10;
           }
         ];
       };

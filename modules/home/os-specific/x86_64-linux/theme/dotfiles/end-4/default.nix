@@ -7,6 +7,7 @@ let
       "Lexend"
       "Chakra Petch"
       "Crimson Text"
+      "Alfa Slab One"
     ];
   });
   cursor-theme = "Bibata-Modern-Ice";
@@ -48,6 +49,7 @@ in
       noto-fonts
       noto-fonts-cjk-sans
       google-fonts
+      cascadia-code
       material-symbols
     ]) ++ (with pkgs.nerd-fonts; [
       ubuntu

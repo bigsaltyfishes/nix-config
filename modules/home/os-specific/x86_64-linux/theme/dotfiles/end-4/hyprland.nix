@@ -26,6 +26,7 @@ in
       portalPackage = hypr.xdg-desktop-portal-hyprland;
       settings = {
         env = [
+          "NIXOS_OZONE_WL, 1"
           "QT_IM_MODULE, fcitx"
           "XMODIFIERS, @im=fcitx"
           "SDL_IM_MODULE, fcitx"
@@ -290,7 +291,7 @@ in
             "Super, Period, exec, pkill fuzzel || ~/.local/bin/fuzzel-emoji"
             "Super, P, pin"
             "Super, Q, killactive, "
-            "Super, Return, exec, foot"
+            "Super, Return, exec, kitty"
             "Super, Right, movefocus, r"
             "Super+Shift+Alt, mouse:275, exec, playerctl previous"
             ''
@@ -322,7 +323,7 @@ in
             "Super, S, togglespecialworkspace, "
             "Super, Tab, exec, ags -t 'overview'"
             "Super, T, exec, "
-            "Super, T, exec, foot"
+            "Super, T, exec, kitty"
             "Super, Up, movefocus, u"
             "Super, V, exec, pkill fuzzel || cliphist list | fuzzel  --match-mode fzf --dmenu | cliphist decode | wl-copy"
             "Super, W, exec, google-chrome-stable"
@@ -483,7 +484,13 @@ in
       ];
     };
 
-    gtk.enable = true;
+    gtk = {
+      enable = true;
+      iconTheme = {
+        package = pkgs.adwaita-icon-theme;
+        name = "Adwaita";
+      };
+    };
     qt.enable = true;
   };
 }

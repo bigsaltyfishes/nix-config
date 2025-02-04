@@ -6,6 +6,7 @@ in
   programs.zsh = lib.mkIf (cfg == "zsh") {
     enable = true;
     initExtra = ''
+      export PATH=$HOME/.cargo/bin:$PATH
       source ${pkgs.zinit}/share/zinit/zinit.zsh
       zinit ice depth=1; zinit light romkatv/powerlevel10k
 

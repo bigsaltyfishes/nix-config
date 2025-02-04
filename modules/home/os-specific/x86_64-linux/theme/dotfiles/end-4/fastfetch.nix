@@ -8,6 +8,9 @@ in
       enable = true;
       settings = {
         logo = {
+          source = "${./fastfetch.png}";
+          type = "kitty";
+          height = 18;
           padding = {
             top = 2;
           };
