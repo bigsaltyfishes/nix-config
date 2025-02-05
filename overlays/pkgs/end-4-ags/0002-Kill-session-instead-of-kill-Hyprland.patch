@@ -1,0 +1,39 @@
+From cf42279d88056261d0cb933034fb84d4c7e14cb9 Mon Sep 17 00:00:00 2001
+From: bigsaltyfishes <bigsaltyfishes@gmail.com>
+Date: Thu, 6 Feb 2025 04:54:04 +0800
+Subject: [PATCH] Kill session instead of kill Hyprland
+
+---
+ .config/ags/modules/overview/miscfunctions.js | 2 +-
+ .config/ags/modules/session/sessionscreen.js  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/.config/ags/modules/overview/miscfunctions.js b/.config/ags/modules/overview/miscfunctions.js
+index 91d8423..557320d 100644
+--- a/.config/ags/modules/overview/miscfunctions.js
++++ b/.config/ags/modules/overview/miscfunctions.js
+@@ -81,7 +81,7 @@ export function launchCustomCommand(command) {
+         execAsync([`bash`, `-c`, `systemctl suspend || loginctl suspend`]).catch(print);
+     }
+     else if (args[0] == '>logout') { // Log out
+-        execAsync([`bash`, `-c`, `pkill Hyprland || pkill sway`]).catch(print);
++        execAsync([`printenv`, `XDG_SESSION_ID`]).then(out => execAsync([`bash`, `-c`, `loginctl kill-session ${out}`])).catch(print);
+     }
+ }
+ 
+diff --git a/.config/ags/modules/session/sessionscreen.js b/.config/ags/modules/session/sessionscreen.js
+index 007878b..68789f7 100644
+--- a/.config/ags/modules/session/sessionscreen.js
++++ b/.config/ags/modules/session/sessionscreen.js
+@@ -62,7 +62,7 @@ const SessionButton = (name, icon, command, props = {}, colorid = 0) => {
+ export default ({ id = 0 }) => {
+     // lock, logout, sleep
+     const lockButton = SessionButton(getString('Lock'), 'lock', () => { closeWindowOnAllMonitors('session'); execAsync(['loginctl', 'lock-session']).catch(print) }, {}, 1);
+-    const logoutButton = SessionButton(getString('Logout'), 'logout', () => { closeWindowOnAllMonitors('session'); execAsync(['bash', '-c', 'pkill Hyprland || pkill sway || pkill niri || loginctl terminate-user $USER']).catch(print) }, {}, 2);
++    const logoutButton = SessionButton(getString('Logout'), 'logout', () => { closeWindowOnAllMonitors('session'); execAsync([`printenv`, `XDG_SESSION_ID`]).then(out => execAsync([`bash`, `-c`, `loginctl kill-session ${out}`])).catch(print); }, {}, 2);
+     const sleepButton = SessionButton(getString('Sleep'), 'sleep', () => { closeWindowOnAllMonitors('session'); execAsync(['bash', '-c', 'systemctl suspend || loginctl suspend']).catch(print) }, {}, 3);
+     // hibernate, shutdown, reboot
+     const hibernateButton = SessionButton(getString('Hibernate'), 'downloading', () => { closeWindowOnAllMonitors('session'); execAsync(['bash', '-c', 'systemctl hibernate || loginctl hibernate']).catch(print) }, {}, 4);
+-- 
+2.47.1
+

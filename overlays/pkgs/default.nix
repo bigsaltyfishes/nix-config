@@ -8,6 +8,7 @@
       qemu-user = final.callPackage ./qemu-user { };
       end-4-ags = final.callPackage ./end-4-ags { };
       end-4-hyprland-shaders = final.callPackage ./end-4-hyprland-shaders { };
+      end-4-kvantum = final.callPackage ./end-4-kvantum { };
       illogical-impulse-oneui4-icons = final.callPackage ./illogical-impulse-oneui4-icons { };
     } // lib.optionalAttrs (system == "x86_64-darwin") {
       p11-kit = final.callPackage ./p11-kit { inherit super; };

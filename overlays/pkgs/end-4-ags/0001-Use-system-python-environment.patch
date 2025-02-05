@@ -1,0 +1,59 @@
+From e3f70d281776c7c13a9c4aaa6346243d5a62510c Mon Sep 17 00:00:00 2001
+From: bigsaltyfishes <bigsaltyfishes@gmail.com>
+Date: Thu, 6 Feb 2025 04:06:21 +0800
+Subject: [PATCH] Use system python environment
+
+* Let Nix to handle this
+---
+ .config/ags/scripts/color_generation/applycolor.sh              | 2 +-
+ .../ags/scripts/color_generation/generate_colors_material.py    | 2 +-
+ .config/ags/scripts/hyprland/get_keybinds.py                    | 2 +-
+ .config/ags/scripts/wayland-idle-inhibitor.py                   | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/.config/ags/scripts/color_generation/applycolor.sh b/.config/ags/scripts/color_generation/applycolor.sh
+index 41cd437..6cb12f7 100755
+--- a/.config/ags/scripts/color_generation/applycolor.sh
++++ b/.config/ags/scripts/color_generation/applycolor.sh
+@@ -149,7 +149,7 @@ apply_gtk() { # Using gradience-cli
+   done
+ 
+   mkdir -p "$XDG_CONFIG_HOME/presets" # create gradience presets folder
+-  $(eval echo $ILLOGICAL_IMPULSE_VIRTUAL_ENV)/bin/gradience-cli apply -p "$CACHE_DIR"/user/generated/gradience/preset.json --gtk both
++  gradience-cli apply -p "$CACHE_DIR"/user/generated/gradience/preset.json --gtk both
+ 
+   # And set GTK theme manually as Gradience defaults to light adw-gtk3
+   # (which is unreadable when broken when you use dark mode)
+diff --git a/.config/ags/scripts/color_generation/generate_colors_material.py b/.config/ags/scripts/color_generation/generate_colors_material.py
+index fac1eaf..714e959 100755
+--- a/.config/ags/scripts/color_generation/generate_colors_material.py
++++ b/.config/ags/scripts/color_generation/generate_colors_material.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env -S\_/bin/sh\_-xc\_"source\_\$(eval\_echo\_\$ILLOGICAL_IMPULSE_VIRTUAL_ENV)/bin/activate&&exec\_python\_-E\_"\$0"\_"\$@""
++#!/usr/bin/env python3
+ import argparse
+ import math
+ import json
+diff --git a/.config/ags/scripts/hyprland/get_keybinds.py b/.config/ags/scripts/hyprland/get_keybinds.py
+index 3e4dcd1..9b784df 100755
+--- a/.config/ags/scripts/hyprland/get_keybinds.py
++++ b/.config/ags/scripts/hyprland/get_keybinds.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env -S\_/bin/sh\_-xc\_"source\_\$(eval\_echo\_\$ILLOGICAL_IMPULSE_VIRTUAL_ENV)/bin/activate&&exec\_python\_-E\_"\$0"\_"\$@""
++#!/usr/bin/env python3
+ import argparse
+ import re
+ import os
+diff --git a/.config/ags/scripts/wayland-idle-inhibitor.py b/.config/ags/scripts/wayland-idle-inhibitor.py
+index ec74d09..ab34b1d 100755
+--- a/.config/ags/scripts/wayland-idle-inhibitor.py
++++ b/.config/ags/scripts/wayland-idle-inhibitor.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env -S\_/bin/sh\_-xc\_"source\_\$(eval\_echo\_\$ILLOGICAL_IMPULSE_VIRTUAL_ENV)/bin/activate&&exec\_python\_-E\_"\$0"\_"\$@""
++#!/usr/bin/env python3
+ import sys
+ from dataclasses import dataclass
+ from signal import SIGINT, SIGTERM, signal
+-- 
+2.47.1
+

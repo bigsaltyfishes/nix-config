@@ -1,7 +1,7 @@
 { fetchFromGitHub, stdenv }:
 
 stdenv.mkDerivation {
-  pname = "end-4-hyprland-shaders";
+  pname = "end-4-kvantum";
   version = "latest";
 
   src = fetchFromGitHub {
@@ -13,11 +13,11 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out
-    cp -r $src/.config/hypr/shaders $out/
+    cp -r $src/.config/Kvantum $out/
   '';
 
   meta = {
-    description = "Hyprland Shaders written by end-4";
+    description = "Kvantum theme written by end-4";
     license = "GPL-3.0";
   };
 }

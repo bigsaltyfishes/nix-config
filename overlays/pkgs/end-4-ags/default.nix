@@ -7,13 +7,18 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "end-4";
     repo = "dots-hyprland";
-    rev = "31985018ec269e9f4d12f91e486dd5dcd61fd022";
-    sha256 = "sha256-cfR7UMF5XhOxEnfpQQdLIW8rmLLkMEbhXNiabaBXngI=";
+    rev = "5c396d7548cf1f6d2460e5b1425301d0c960fc50";
+    sha256 = "sha256-EMhcIApxaV7X2H88eNWekKDpd56OU7CeWImftlkoM8o=";
   };
 
-  installPhase = ''
+  patches = [ 
+    ./0001-Use-system-python-environment.patch
+    ./0002-Kill-session-instead-of-kill-Hyprland.patch
+  ];
+  
+  buildPhase = ''
     mkdir -p $out
-    cp -r $src/.config/ags $out/
+    cp -r .config/ags $out/
   '';
 
   meta = {
