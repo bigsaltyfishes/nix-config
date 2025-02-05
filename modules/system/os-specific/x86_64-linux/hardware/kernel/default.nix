@@ -7,7 +7,7 @@ in
     enable = lib.mkEnableOption "Install Kernel";
     package = lib.mkOption {
       type = lib.types.raw;
-      default = pkgs.linuxPackages_zen;
+      default = pkgs.linuxPackages_xanmod;
       description = "Kernel Package to use";
     };
     supportedFilesystems = lib.mkOption {
