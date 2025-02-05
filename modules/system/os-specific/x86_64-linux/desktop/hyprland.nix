@@ -9,6 +9,11 @@ in
     sddm = {
       enable = lib.mkEnableOption "Enable SDDM";
     };
+    monitor = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ",preferred,auto,1" ];
+      description = "The monitors to use";
+    };
   };
 
   options.molyuu.home-manager.theme = {

@@ -1,8 +1,9 @@
-{ config, lib, inputs, pkgs, ... }:
+{ config, osConfig, lib, inputs, pkgs, ... }:
 let
   hypr = inputs.hyprland.packages.${pkgs.system};
   plugins = inputs.hyprland-plugins.packages.${pkgs.system};
   enabled = config.molyuu.home-manager.theme.dotfile == "end-4";
+  monitor = osConfig.molyuu.desktop.hyprland.monitor;
 in
 {
   config = lib.mkIf enabled {
@@ -36,7 +37,7 @@ in
           "QT_QPA_PLATFORMTHEME, qt5ct"
         ];
         # TODO: Use a option to build this
-        monitor = [ "DP-1,1920x1080@165.00,0x0,1" ];
+        monitor = monitor;
         "exec-once" = [
           "swww-daemon --format xrgb"
           "ags"
