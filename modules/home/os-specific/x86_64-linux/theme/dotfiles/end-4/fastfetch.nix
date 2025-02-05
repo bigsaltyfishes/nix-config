@@ -9,7 +9,7 @@ in
       settings = {
         logo = {
           source = "${./fastfetch.png}";
-          type = "kitty";
+          type = "auto";
           height = 18;
           padding = {
             top = 2;
