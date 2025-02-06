@@ -31,28 +31,16 @@
     Jovian-NixOS.url = "github:bigsaltyfishes/Jovian-NixOS";
     Jovian-NixOS.inputs.nixpkgs.follows = "nixpkgs";
 
-    # AGS
-    ags.url = "github:Aylur/ags/v1";
-    ags.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Anyrun
-    anyrun.url = "github:Kirottu/anyrun";
-    anyrun.inputs.nixpkgs.follows = "nixpkgs";
-
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
     hyprland-plugins.inputs.hyprland.follows = "hyprland";
+    illogical-impulse.url = "github:bigsaltyfishes/end-4-dots";
+    illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Icons
-    more-waita = {
-      url = "github:somepaulo/MoreWaita";
-      flake = false;
-    };
-    
     # Extra
     nix-alien.url = "github:thiagokokada/nix-alien";
   };
