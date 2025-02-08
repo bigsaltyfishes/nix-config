@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737636169,
-        "narHash": "sha256-8eTSlkQ6zFmjI6kVrM1wMtTMUi8Pyjpuoiww9cX6noU=",
+        "lastModified": 1739018051,
+        "narHash": "sha256-Gy7GvKTGDD4ZtzRr55mPnEpf4O6sujx5f4ke3uOcIw0=",
         "owner": "bigsaltyfishes",
         "repo": "Jovian-NixOS",
-        "rev": "162f697a2f341250d9be8b5b5b565618f39fa3b1",
+        "rev": "fa9bb4f3e25487744cb73efc8326ac67d54fa2cb",
         "type": "github"
       },
       "original": {
