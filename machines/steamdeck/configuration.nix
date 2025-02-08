@@ -11,8 +11,6 @@
 
   molyuu.system.profiles = [ "pc" "gaming" ];
 
-  services.clash-verge.enable = true;
-
   environment.systemPackages = [
     (pkgs.steamdeck-firmware or null)
     (pkgs.jupiter-dock-updater-bin or null)

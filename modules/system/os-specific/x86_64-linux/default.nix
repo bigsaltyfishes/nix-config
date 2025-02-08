@@ -6,7 +6,6 @@
     ./locale
     ./desktop
     ./security
-    ./services
     ./hardware
   ];
 }
