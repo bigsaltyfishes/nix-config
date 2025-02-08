@@ -26,6 +26,7 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.dconf.enable = true;
+    services.udisks2.enable = true;
     services.gnome.gnome-keyring.enable = true;
     programs.hyprland = {
       enable = true;

@@ -604,11 +604,11 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1738875289,
-        "narHash": "sha256-MyXP4X7osl75cJp0RMx6VVOzWYj/LrJzT8/9KFdfKsQ=",
+        "lastModified": 1738999897,
+        "narHash": "sha256-dVjkmtL30AIgkWiYWY40lOzxikQ3YTyOPCtXUXrw5qQ=",
         "owner": "bigsaltyfishes",
         "repo": "end-4-dots",
-        "rev": "c1d35558a7ffa09c0f2bbf4f2a692d16dcbb2fef",
+        "rev": "ce40d55fb7d79a9ed8d2c05dbd87c53fcb049858",
         "type": "github"
       },
       "original": {
