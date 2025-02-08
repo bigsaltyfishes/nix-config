@@ -7,8 +7,8 @@ in
   config = lib.mkIf (lib.elem "extraApps" profile.extraFeatures || lib.elem "full" profile.extraFeatures) {
     programs.spicetify = {
       enable = true;
-      theme = spicePkgs.themes.catppuccin;
-      colorScheme = "mocha";
+      theme = spicePkgs.themes.dribbblish;
+      colorScheme = "gruvbox-material-dark";
     };
   };
 }
