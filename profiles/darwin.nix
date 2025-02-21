@@ -1,4 +1,9 @@
-{ config, lib, system, ... }:
+{
+  config,
+  lib,
+  system,
+  ...
+}:
 let
   cfg = config.molyuu.system.profiles;
 in
@@ -14,7 +19,10 @@ in
     };
     services.nix-daemon.enable = true;
     nixpkgs.hostPlatform = system;
-    molyuu.home-manager.profile.extraFeatures = [ "baseDevel" "extraDevel" ];
+    molyuu.home-manager.profile.extraFeatures = [
+      "baseDevel"
+      "extraDevel"
+    ];
     system.stateVersion = 4;
   };
 }

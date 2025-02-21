@@ -9,7 +9,10 @@
     ./hardware-configuration.nix
   ];
 
-  molyuu.system.profiles = [ "pc" "gaming" ];
+  molyuu.system.profiles = [
+    "pc"
+    "gaming"
+  ];
 
   environment.systemPackages = [
     (pkgs.steamdeck-firmware or null)
@@ -21,7 +24,7 @@
   molyuu.system.autoMount.enable = true;
 
   molyuu.desktop.pantheon.enable = true;
-  
+
   services.libinput.enable = true;
   services.xserver.displayManager.startx.enable = true;
   services.xserver.displayManager.lightdm.enable = lib.mkForce false;
@@ -56,9 +59,10 @@
         ryzenadj
         kmod
       ];
-      extraPythonPackages = pythonPackages: with pythonPackages; [
-        pyyaml
-      ];
+      extraPythonPackages =
+        pythonPackages: with pythonPackages; [
+          pyyaml
+        ];
     };
     hardware.has.amd.gpu = true;
   };

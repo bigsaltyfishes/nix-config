@@ -6,7 +6,10 @@
     description = ''
       List of features to enable in the system configuration.
     '';
-    example = [ "pc" "gaming" ];
+    example = [
+      "pc"
+      "gaming"
+    ];
   };
 
   config = {
@@ -15,11 +18,8 @@
 
   imports = [
     ./nix-config.nix
-  ] ++ (lib.optionals (system == "x86_64-linux") [
     ./minimum.nix
     ./pc.nix
     ./gaming.nix
-  ]) ++ (lib.optionals (system == "x86_64-darwin") [
-    ./darwin.nix
-  ]);
+  ];
 }

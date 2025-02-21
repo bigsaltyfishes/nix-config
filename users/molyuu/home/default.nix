@@ -1,11 +1,16 @@
-{ pkgs, lib, system, ... }:
+{
+  pkgs,
+  lib,
+  system,
+  ...
+}:
 {
   imports = [
     ../../../modules/home
   ];
 
   home.username = "molyuu";
-  home.homeDirectory = if (system == "x86_64-darwin") then "/Users/molyuu" else "/home/molyuu";
+  home.homeDirectory = "/home/molyuu";
 
   home.packages = with pkgs; [
     vim
@@ -25,9 +30,7 @@
     userName = "bigsaltyfishes";
     userEmail = "bigsaltyfishes@gmail.com";
     extraConfig = {
-      credential.helper = "${
-        pkgs.git.override { withLibsecret = true; }
-      }/bin/git-credential-libsecret";
+      credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin/git-credential-libsecret";
     };
   };
 

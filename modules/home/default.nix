@@ -1,8 +1,10 @@
 { ... }:
 {
   imports = [
-    ./common
-    ./os-specific
+    ./apps
+    ./shells
+    ./theme
+    ./devel
     ../../overlays
   ];
 }

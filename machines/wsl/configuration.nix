@@ -13,6 +13,7 @@
   wsl.defaultUser = "molyuu";
   wsl.nativeSystemd = true;
   wsl.interop.register = true;
+  vscode-remote-workaround.enable = true;
 
   virtualisation.docker.storageDriver = "overlay2";
 

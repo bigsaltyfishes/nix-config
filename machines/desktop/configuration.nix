@@ -13,5 +13,8 @@
   molyuu.home-manager.theme.dotfile = "end-4";
   molyuu.hardware.graphics.amdgpu.enable = true;
   hardware.bluetooth.enable = true;
-  molyuu.system.profiles = [ "pc" "gaming" ];
+  molyuu.system.profiles = [
+    "pc"
+    "gaming"
+  ];
 }

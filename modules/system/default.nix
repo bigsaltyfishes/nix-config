@@ -1,7 +1,12 @@
 { ... }:
 {
   imports = [
-    ./os-specific
+    ./programs
+    ./network
+    ./locale
+    ./desktop
+    ./security
+    ./hardware
     ../../overlays
   ];
 }

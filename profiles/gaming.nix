@@ -1,5 +1,10 @@
-{ config, lib, pkgs, ... }:
-let 
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   cfg = config.molyuu.system.profiles;
 in
 {
