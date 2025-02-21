@@ -15,6 +15,8 @@
   wsl.interop.register = true;
   vscode-remote-workaround.enable = true;
 
+  molyuu.hardware.graphics.amdgpu.enable = true;
+
   virtualisation.docker.storageDriver = "overlay2";
 
   molyuu.home-manager.profile.extraFeatures = [ "baseDevel" ];
