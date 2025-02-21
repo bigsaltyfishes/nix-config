@@ -29,6 +29,11 @@ in
           gnumake
         ];
 
+        programs.direnv = {
+          enable = true;
+          enableZshIntegration = true;
+        };
+
         programs.vscode =
           lib.mkIf (lib.elem "extraDevel" profile.extraFeatures || lib.elem "full" profile.extraFeatures)
             {
