@@ -57,6 +57,7 @@ in
         source-han-serif
         jetbrains-mono
         nerd-fonts.meslo-lg
+        ttf-ms-win10
         nur.repos.rewine.ttf-wps-fonts
       ];
 
