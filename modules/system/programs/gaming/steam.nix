@@ -15,7 +15,6 @@ in
   config.systemd.user.services.steam-cef-debug = lib.mkIf cfg.enable {
     description = "Enable Steam CEF Remote Debugging API";
     wantedBy = [
-      "default.target"
       "graphical-session.target"
     ];
     before = [ "graphical-session.target" ];

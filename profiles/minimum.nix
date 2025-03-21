@@ -42,7 +42,7 @@
       };
     };
 
-    system.stateVersion = "unstable";
+    system.stateVersion = "25.05";
     networking.hostName = "molyuu";
   };
 }

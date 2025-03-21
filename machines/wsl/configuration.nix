@@ -11,9 +11,9 @@
 
   wsl.enable = true;
   wsl.defaultUser = "molyuu";
-  wsl.nativeSystemd = true;
   wsl.interop.register = true;
-  vscode-remote-workaround.enable = true;
+
+  security.sudo.wheelNeedsPassword = true;
 
   molyuu.hardware.graphics.amdgpu.enable = true;
 
