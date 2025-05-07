@@ -18,6 +18,7 @@
     services.resolved.enable = true;
 
     programs.nix-ld.enable = true;
+    programs.ccache.enable = true;
 
     boot.binfmt.registrations.appimage = {
       wrapInterpreterInShell = false;
