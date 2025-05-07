@@ -25,8 +25,11 @@ in
           nixfmt-rfc-style
           (python3.withPackages (p: pypkgs))
           rust-toolchains
-          gcc
           gnumake
+          clang
+          clang-tools
+          lld
+          lldb
         ];
 
         programs.direnv = {
