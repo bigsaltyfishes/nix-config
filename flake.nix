@@ -33,7 +33,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
     hyprland-plugins.inputs.hyprland.follows = "hyprland";
-    illogical-impulse.url = "github:bigsaltyfishes/end-4-dots";
+    illogical-impulse.url = "github:bigsaltyfishes/end-4-dots/wip/update";
     illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
