@@ -25,44 +25,40 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
-    fsType = "btrfs";
-    options = [ "subvol=@rootfs" ];
-  };
+  fileSystems."/" =
+    {
+      device = "/dev/disk/by-uuid/d45d4491-e51a-45a5-b8a5-bad55f2e1770";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "subvol=@rootfs" ];
+    };
 
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "subvol=@home"
-    ];
-  };
+  fileSystems."/home" =
+    {
+      device = "/dev/disk/by-uuid/d45d4491-e51a-45a5-b8a5-bad55f2e1770";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "subvol=@home" ];
+    };
 
-  fileSystems."/var/lib/swap" = {
-    device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
-    fsType = "btrfs";
-    options = [ "subvol=@swap" ];
-  };
+  fileSystems."/var/lib/swap" =
+    {
+      device = "/dev/disk/by-uuid/d45d4491-e51a-45a5-b8a5-bad55f2e1770";
+      fsType = "btrfs";
+      options = [ "subvol=@swap" ];
+    };
 
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/C535-407B";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
-  };
+  fileSystems."/boot/efi" =
+    {
+      device = "/dev/disk/by-uuid/0634-E1C7";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/7d0e5c2f-e657-4af9-9efb-383499e9777d";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "subvol=@nix"
-    ];
-  };
+  fileSystems."/nix" =
+    {
+      device = "/dev/disk/by-uuid/d45d4491-e51a-45a5-b8a5-bad55f2e1770";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" "subvol=@nix" ];
+    };
 
   swapDevices = [
     {
