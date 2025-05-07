@@ -6,13 +6,9 @@
 }:
 {
   config = {
-    environment.systemPackages =
-      (with inputs.nix-alien.packages.${pkgs.system}; [
-        nix-alien
-      ])
-      ++ (with pkgs; [
-        appimage-run
-      ]);
+    environment.systemPackages = with pkgs; [
+      appimage-run
+    ];
 
     services.sshd.enable = true;
     services.resolved.enable = true;

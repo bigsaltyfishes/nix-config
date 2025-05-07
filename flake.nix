@@ -38,9 +38,6 @@
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Extra
-    nix-alien.url = "github:thiagokokada/nix-alien";
   };
 
   outputs =
