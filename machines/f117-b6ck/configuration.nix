@@ -9,7 +9,11 @@
     ./hardware-configuration.nix
   ];
 
-  molyuu.desktop.pantheon.enable = true;
+  molyuu.desktop.hyprland = {
+    enable = true;
+    sddm.enable = true;
+  };
+
   molyuu.system.profiles = [
     "pc"
     "gaming"
