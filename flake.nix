@@ -36,6 +36,10 @@
     illogical-impulse.url = "github:bigsaltyfishes/end-4-dots/wip/update";
     illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Niri
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
+
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -44,6 +48,7 @@
     {
       self,
       nixpkgs,
+      niri,
       nur,
       NixOS-WSL,
       NixOS-WSL-VSCode,
@@ -54,6 +59,7 @@
     let
       inherit (self) outputs;
       commonModules = [
+        #niri.nixosModules.niri
         nur.modules.nixos.default
         ./users
         ./profiles

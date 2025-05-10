@@ -6,6 +6,7 @@
 }:
 {
   nixpkgs.overlays = [
+    inputs.niri.overlays.niri
     inputs.nur.overlays.default
     inputs.rust-overlay.overlays.default
     (final: super: {

@@ -40,7 +40,7 @@ in
         { name = "djui/alias-tips"; }
       ];
     };
-    initExtra = ''
+    initContent = ''
       export PATH=$HOME/.cargo/bin:$PATH
     '';
   };

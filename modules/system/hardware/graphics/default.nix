@@ -33,7 +33,7 @@
     };
   };
 
-  config.hardware.graphics = {
+  config.hardware.graphics = lib.mkIf (config.molyuu.hardware.graphics.nvidia.enable || config.molyuu.hardware.graphics.intel.enable || config.molyuu.hardware.graphics.amdgpu.enable) {
     enable = true;
     enable32Bit = true;
   };

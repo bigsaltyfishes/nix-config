@@ -8,7 +8,6 @@ in
     molyuu.hardware.kernel.grub.enable = true;
     molyuu.hardware.audio.enable = true;
 
-    molyuu.system.network.enable = true;
     molyuu.system.network.ntp.enable = true;
 
     services.openssh.enable = true;

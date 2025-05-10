@@ -9,10 +9,7 @@
     ./hardware-configuration.nix
   ];
 
-  molyuu.desktop.hyprland = {
-    enable = true;
-    sddm.enable = true;
-  };
+  molyuu.home-manager.theme.dotfile = "molyuu";
 
   molyuu.system.profiles = [
     "pc"

@@ -29,6 +29,7 @@
       enable = true;
       emulatedSystems = [ "aarch64-linux" ];
     };
+    molyuu.system.network.enable = true;
 
     virtualisation.docker = {
       enable = true;
