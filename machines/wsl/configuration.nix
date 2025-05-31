@@ -38,6 +38,11 @@
     defaultUser = "molyuu";
     interop.register = true;
     useWindowsDriver = true;
+    wslConf = {
+      automount = {
+        ldconfig = true;
+      };
+    };
   };
 
   security.sudo.wheelNeedsPassword = true;

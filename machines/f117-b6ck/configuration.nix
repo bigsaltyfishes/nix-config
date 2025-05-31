@@ -9,8 +9,6 @@
     ./hardware-configuration.nix
   ];
 
-  molyuu.home-manager.theme.dotfile = "molyuu";
-
   molyuu.system.profiles = [
     "pc"
     "gaming"

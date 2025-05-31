@@ -6,6 +6,5 @@
     ./pantheon.nix
     ./pipewire.nix
     ./hyprland.nix
-    ./niri.nix
   ];
 }
