@@ -15,7 +15,6 @@ stdenv.mkDerivation {
 
   src = "${krnl_src}/drivers/hv/dxgkrnl";
 
-  sourceRoot = "drivers/hv/dxgkrnl";
   nativeBuildInputs = kernel.moduleBuildDependencies;
 
   # Patch from https://github.com/staralt/dxgkrnl-dkms/raw/refs/heads/main/linux-msft-wsl-6.6.y/0002-Fix-eventfd_signal.patch
