@@ -22,10 +22,10 @@ in
 
     programs.dconf.enable = true;
     environment.systemPackages = with pkgs; [
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       gnomeExtensions.appindicator
     ];
-    services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+    services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
     xdg.portal.enable = true;
     services.flatpak.enable = true;
