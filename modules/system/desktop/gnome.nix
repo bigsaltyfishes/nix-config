@@ -17,13 +17,8 @@ in
 
   # Base GNOME Desktop
   config = lib.mkIf cfg.enable {
-    services.xserver = {
-      enable = true;
-      xkb.layout = "us";
-      desktopManager.gnome.enable = true;
-      desktopManager.xterm.enable = false;
-      displayManager.gdm.enable = lib.mkIf cfg.gdm.enable true;
-    };
+    services.desktopManager.gnome.enable = true;
+    services.displayManager.gdm.enable = lib.mkIf cfg.gdm.enable true;
 
     programs.dconf.enable = true;
     environment.systemPackages = with pkgs; [

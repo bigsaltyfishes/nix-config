@@ -13,6 +13,9 @@
       rust-toolchains = super.rust-bin.stable.latest.default.override { extensions = [ "rust-src" ]; };
       qemu-user = final.callPackage ./qemu-user { };
       ttf-ms-win10 = final.callPackage ./ttf-ms-win10 { };
+      cosmic-notifications = final.writeShellScriptBin "cosmic-notifications" ''
+        LANG=en_US.UTF-8 ${super.cosmic-notifications}/bin/cosmic-notifications
+      '';
     })
   ];
 }

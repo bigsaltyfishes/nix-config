@@ -9,6 +9,11 @@
     ./hardware-configuration.nix
   ];
 
+  molyuu.desktop.cosmic = {
+    enable = true;
+    greeter.enable = true;
+  };
+  
   molyuu.system.profiles = [
     "pc"
     "gaming"
