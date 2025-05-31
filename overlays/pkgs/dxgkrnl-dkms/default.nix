@@ -1,11 +1,11 @@
-{ stdenv, lib, fetchFromGitHub, linuxPackages_xanmod, kernelPkg ? linuxPackages_xanmod }:
+{ stdenv, lib, fetchFromGitHub, fetchurl, linuxPackages_xanmod, kernelPkg ? linuxPackages_xanmod }:
 let
   version = "6.6.87.1";
   krnl_src = fetchFromGitHub {
     owner = "microsoft";
     repo = "WSL2-Linux-Kernel";
     rev = "linux-msft-wsl-${version}";
-    hash = "";
+    hash = "sha256-eE9cyI26HLtz5kyooNNuRn3PrZIYkW/Jk0SrjlOVVRE=";
   };
   kernel = kernelPkg.kernel;
 in
@@ -20,11 +20,9 @@ stdenv.mkDerivation {
 
   # Patch from https://github.com/staralt/dxgkrnl-dkms/raw/refs/heads/main/linux-msft-wsl-6.6.y/0002-Fix-eventfd_signal.patch
   patches = [
-    (fetchFromGitHub {
-      owner = "staralt";
-      repo = "dxgkrnl-dkms";
-      rev = "4d0fb9d935db546912e2ab31302e6f9b6e03be3b";
-      sha256 = "";
+    (fetchurl {
+      url = "https://raw.githubusercontent.com/staralt/dxgkrnl-dkms/4d0fb9d935db546912e2ab31302e6f9b6e03be3b/linux-msft-wsl-6.6.y/0002-Fix-eventfd_signal.patch";
+      sha256 = "sha256-RMJNu+p4M2icrlOV5vmREkgm5UcXLIpBwXcBhocGMlI=";
     })
   ];
 
