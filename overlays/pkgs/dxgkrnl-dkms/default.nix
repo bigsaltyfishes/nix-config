@@ -19,10 +19,7 @@ stdenv.mkDerivation {
 
   # Patch from https://github.com/staralt/dxgkrnl-dkms/raw/refs/heads/main/linux-msft-wsl-6.6.y/0002-Fix-eventfd_signal.patch
   patches = [
-    (fetchurl {
-      url = "https://raw.githubusercontent.com/staralt/dxgkrnl-dkms/4d0fb9d935db546912e2ab31302e6f9b6e03be3b/linux-msft-wsl-6.6.y/0002-Fix-eventfd_signal.patch";
-      sha256 = "sha256-RMJNu+p4M2icrlOV5vmREkgm5UcXLIpBwXcBhocGMlI=";
-    })
+    ./0002-Fix-eventfd_signal.patch
   ];
 
   postPatch = ''
