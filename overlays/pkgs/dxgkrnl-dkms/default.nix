@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchFromGitHub, kernel }:
+{ stdenv, lib, fetchFromGitHub, linuxPackages_xanmod, kernelPkg ? linuxPackages_xanmod }:
 let
   version = "6.6.87.1";
   krnl_src = fetchFromGitHub {
@@ -7,6 +7,7 @@ let
     rev = "linux-msft-wsl-${version}";
     hash = "";
   };
+  kernel = kernelPkg.kernel;
 in
 stdenv.mkDerivation {
   pname = "dxgkrnl-dkms";
