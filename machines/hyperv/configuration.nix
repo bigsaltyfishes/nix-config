@@ -22,8 +22,6 @@
 
   services.openssh.enable = true;
 
-  virtualisation.hypervGuest.enable = true;
-
   boot.extraModulePackages = with pkgs; [
     dxgkrnl-dkms
   ];

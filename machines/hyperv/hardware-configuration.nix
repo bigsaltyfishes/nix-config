@@ -6,37 +6,37 @@
 {
   imports = [ ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "ahci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/36c9e931-05fa-4dca-814b-8ec1c1fb6cdd";
+    { device = "/dev/disk/by-uuid/d0e862a9-4634-4015-9e3d-cd3a2f0d1897";
       fsType = "btrfs";
       options = [ "compress=zstd" "subvol=root" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/36c9e931-05fa-4dca-814b-8ec1c1fb6cdd";
+    { device = "/dev/disk/by-uuid/d0e862a9-4634-4015-9e3d-cd3a2f0d1897";
       fsType = "btrfs";
       options = [ "compress=zstd" "subvol=home" ];
     };
 
   fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/36c9e931-05fa-4dca-814b-8ec1c1fb6cdd";
+    { device = "/dev/disk/by-uuid/d0e862a9-4634-4015-9e3d-cd3a2f0d1897";
       fsType = "btrfs";
       options = [ "compress=zstd" "noatime" "subvol=nix" ];
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/64FE-3240";
+    { device = "/dev/disk/by-uuid/1402-4D93";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/333702a0-57f3-4b2d-bf51-59f115a081dd"; }
+    [ { device = "/dev/disk/by-uuid/3d3a4259-120a-4f2a-b816-0bcd8ccbe29d"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -47,4 +47,5 @@
   # networking.interfaces.ens33.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  virtualisation.hypervGuest.enable = true;
 }
