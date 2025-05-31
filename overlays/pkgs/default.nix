@@ -16,6 +16,7 @@
       cosmic-notifications = final.writeShellScriptBin "cosmic-notifications" ''
         LANG=en_US.UTF-8 ${super.cosmic-notifications}/bin/cosmic-notifications
       '';
+      dxgkrnl-dkms = final.callPackage ./dxgkrnl-dkms { };
     })
   ];
 }

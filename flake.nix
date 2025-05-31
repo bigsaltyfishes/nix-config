@@ -137,14 +137,14 @@
             ];
         };
 
-        molyuu-vmware = nixpkgs.lib.nixosSystem rec {
+        molyuu-hyperv = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           specialArgs = { inherit inputs outputs system; };
           modules =
             commonModules
             ++ (linuxHomeManager system)
             ++ [
-              ./machines/vmware/configuration.nix
+              ./machines/hyprv/configuration.nix
             ];
         };
       };

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -22,7 +22,11 @@
 
   services.openssh.enable = true;
 
-  virtualisation.vmware.guest.enable = true;
+  virtualisation.hypervGuest.enable = true;
 
+  boot.extraModulePackages = with pkgs; [
+    dxgkrnl-dkms
+  ];
+  
   molyuu.home-manager.profile.extraFeatures = [ "extraDevel" ];
 }
