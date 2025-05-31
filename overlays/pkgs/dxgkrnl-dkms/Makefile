@@ -4,8 +4,5 @@
 obj-m	:= dxgkrnl.o
 dxgkrnl-y := dxgmodule.o hmgr.o misc.o dxgadapter.o ioctl.o dxgvmbus.o dxgprocess.o  dxgsyncfile.o
 
-all:
-	$(MAKE) -C "$(KERNEL_DIR)" M="$(PWD)" modules
-
-clean:
-	$(MAKE) -C "$(KERNEL_DIR)" M="$(PWD)" clean
+default:
+	$(MAKE) -C $(KERNEL_DIR) M=$(PWD)
