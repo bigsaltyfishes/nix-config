@@ -144,7 +144,7 @@
             commonModules
             ++ (linuxHomeManager system)
             ++ [
-              ./machines/hyprv/configuration.nix
+              ./machines/hyperv/configuration.nix
             ];
         };
       };
