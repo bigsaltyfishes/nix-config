@@ -37,22 +37,36 @@
     enable = true;
     defaultUser = "molyuu";
     interop.register = true;
-    useWindowsDriver = true;
-    wslConf = {
-      automount = {
-        ldconfig = true;
-      };
-    };
+    useWindowsDriver = true; # Use Windows drivers for WSL
+    extraBin = [
+      {
+        name = "bash";
+        src = "${pkgs.bashInteractive}/bin/bash";
+      }
+    ];
   };
 
   security.sudo.wheelNeedsPassword = true;
   virtualisation.docker.storageDriver = "overlay2";
 
+  programs.nix-ld.libraries = [
+    pkgs.stdenv.cc.cc.lib
+    hsa-runtime-rocr4wsl-amdgpu
+  ];
+
+  environment.systemPackages = with pkgs; [
+    mesa
+    glxinfo
+    mesa-demos
+    vulkan-tools
+  ];
+
   environment.sessionVariables = {
     LD_LIBRARY_PATH = [
-      "${pkgs.stdenv.cc.cc.lib}/lib"
-      "${hsa-runtime-rocr4wsl-amdgpu}/lib"
+      "/run/opengl-driver/lib"
+      "${pkgs.openssl.out}/lib"
     ];
+    GALLIUM_DRIVER = "d3d12";
   };
 
   molyuu.home-manager.profile.extraFeatures = [ "baseDevel" ];

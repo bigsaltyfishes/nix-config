@@ -3,7 +3,7 @@ let
   cfg = config.molyuu.hardware.graphics;
 in
 {
-  config = lib.mkIf cfg.nvidia.enable {
+  config = lib.mkIf (cfg.enable && cfg.nvidia.enable) {
     services.xserver.videoDrivers = lib.mkIf cfg.nvidia.with_xdriver [ "nvidia" ];
 
     hardware.nvidia = {

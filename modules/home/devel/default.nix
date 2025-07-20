@@ -21,6 +21,7 @@ in
     lib.mkIf (lib.elem "baseDevel" profile.extraFeatures || lib.elem "full" profile.extraFeatures)
       {
         home.packages = with pkgs; [
+          jq
           nil
           nixfmt-rfc-style
           (python3.withPackages (p: pypkgs))

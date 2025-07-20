@@ -8,7 +8,7 @@ let
   cfg = config.molyuu.hardware.graphics;
 in
 {
-  config = lib.mkIf cfg.intel.enable {
+  config = lib.mkIf (cfg.enable && cfg.intel.enable) {
     nixpkgs.config.packageOverrides = pkgs: {
       intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
     };

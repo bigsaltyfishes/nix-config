@@ -1,6 +1,7 @@
 { config, lib, ... }:
 {
   options.molyuu.hardware.graphics = {
+    enable = lib.mkEnableOption "Enable graphics support";
     nvidia = {
       enable = lib.mkEnableOption "Device have NVIDIA GPU";
       with_xdriver = lib.mkEnableOption "Install X Video Driver";
@@ -33,7 +34,7 @@
     };
   };
 
-  config.hardware.graphics = lib.mkIf (config.molyuu.hardware.graphics.nvidia.enable || config.molyuu.hardware.graphics.intel.enable || config.molyuu.hardware.graphics.amdgpu.enable) {
+  config.hardware.graphics = lib.mkIf  config.molyuu.hardware.graphics.enable {
     enable = true;
     enable32Bit = true;
   };
