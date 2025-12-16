@@ -56,7 +56,6 @@
 
   environment.systemPackages = with pkgs; [
     mesa
-    glxinfo
     mesa-demos
     vulkan-tools
   ];

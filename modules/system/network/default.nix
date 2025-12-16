@@ -13,7 +13,7 @@ in
   config = {
     networking.wireless.enable = lib.mkForce false;
     systemd.services.wpa_supplicant.enable = lib.mkForce false;
-    services.chrony.enable = cfg.enable && cfg.ntp.enable;
+    services.chrony.enable = lib.mkForce (cfg.enable && cfg.ntp.enable);
   };
 
   imports = [

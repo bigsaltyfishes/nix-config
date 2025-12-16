@@ -6,7 +6,7 @@
 }:
 let
   cfg = config.molyuu.system.binfmt;
-  qus = pkgs.qemu-user.overrideAttrs { arches = cfg.emulatedSystems; };
+  archFor = system: (lib.systems.elaborate { inherit system; }).qemuArch;
 in
 {
   options.molyuu.system.binfmt = {
@@ -23,7 +23,7 @@ in
     boot.binfmt.registrations =
       let
         attrs = sys: {
-          interpreter = "${qus.passthru.binaryFor sys}";
+          interpreter = "${pkgs.qemu-user}/bin/qemu-${archFor sys}";
           wrapInterpreterInShell = false;
           preserveArgvZero = true;
           matchCredentials = true;

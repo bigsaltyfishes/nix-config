@@ -52,7 +52,7 @@ in
     fonts = {
       packages = with pkgs; [
         sarasa-gothic
-        noto-fonts-emoji
+        noto-fonts-color-emoji
         source-han-sans
         source-han-serif
         jetbrains-mono
