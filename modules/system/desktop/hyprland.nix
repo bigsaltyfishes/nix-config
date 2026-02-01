@@ -7,7 +7,6 @@
 }:
 let
   cfg = config.molyuu.desktop.hyprland;
-  xdg-desktop-portal-hyprland = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
 in
 {
   options.molyuu.desktop.hyprland = {
@@ -15,7 +14,7 @@ in
     sddm = {
       enable = lib.mkEnableOption "Enable SDDM";
     };
-    monitor = lib.mkOption {
+    monitors = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ",preferred,auto,1" ];
       description = "The monitors to use";
@@ -33,6 +32,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.dconf.enable = true;
     services.udisks2.enable = true;
+    services.gvfs.enable = true;
     services.gnome.gnome-keyring.enable = true;
     programs.hyprland = {
       enable = true;
@@ -41,32 +41,18 @@ in
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
     };
-    xdg = {
-      portal = {
-        enable = true;
-        wlr.enable = true;
-        xdgOpenUsePortal = true;
-        config = {
-          common.default = [ "gtk" ];
-          hyprland.default = [
-            "gtk"
-            "hyprland"
-          ];
-        };
-        configPackages = [
-          pkgs.xdg-desktop-portal-gtk
-          pkgs.xdg-desktop-portal
-        ];
-        extraPortals = [
-          pkgs.xdg-desktop-portal-gtk
-          pkgs.xdg-desktop-portal
-          xdg-desktop-portal-hyprland
-        ];
-      };
-    };
     services.xserver.enable = true;
     services.flatpak.enable = true;
     molyuu.desktop.themedDisplayManager.sddm.enable = cfg.sddm.enable;
+    security.pam.services.sddm.enableGnomeKeyring = cfg.sddm.enable;
+
+    environment.systemPackages = with pkgs; [
+      nautilus
+    ];
+    programs.nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "ghostty";
+    };
 
     # Use fcitx5 for Hyprland
     molyuu.i18n.inputMethod.fcitx5.enable = true;

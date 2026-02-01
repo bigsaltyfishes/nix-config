@@ -1,7 +1,5 @@
 {
   lib,
-  inputs,
-  pkgs,
   osConfig,
   ...
 }:
@@ -20,6 +18,9 @@ in
               font_family = "JetBrainsMono Nerd Font";
             };
             ui_font_family = "JetBrainsMono Nerd Font";
+            features = {
+              edit_prediction_provider = "copilot";
+            };
           };
         };
       };

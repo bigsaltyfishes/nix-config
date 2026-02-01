@@ -3,8 +3,8 @@
   imports = [
     ./apps
     ./shells
-    ./theme
     ./devel
+    ./theme
     ../../overlays
   ];
 }

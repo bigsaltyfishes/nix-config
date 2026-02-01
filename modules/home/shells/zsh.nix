@@ -8,167 +8,158 @@ let
   cfg = osConfig.molyuu.home-manager.profile.shell;
 in
 {
-  programs.zsh = lib.mkIf (cfg == "zsh") {
-    enable = true;
-    zplug = {
+  config = lib.mkIf (cfg == "zsh") {
+    programs.fzf = {
       enable = true;
-      plugins = [
-        {
-          name = "plugins/git";
-          tags = [ "from:oh-my-zsh" ];
-        }
-        {
-          name = "plugins/completion";
-          tags = [ "from:oh-my-zsh" ];
-        }
-        {
-          name = "plugins/history";
-          tags = [ "from:oh-my-zsh" ];
-        }
-        {
-          name = "plugins/key-bindings";
-          tags = [ "from:oh-my-zsh" ];
-        }
-        {
-          name = "plugins/theme-and-appearance";
-          tags = [ "from:oh-my-zsh" ];
-        }
-        { name = "zsh-users/zsh-completions"; }
-        { name = "zsh-users/zsh-autosuggestions"; }
-        { name = "zsh-users/zsh-history-substring-search"; }
-        { name = "zdharma-continuum/fast-syntax-highlighting"; }
-        { name = "djui/alias-tips"; }
-      ];
+      enableZshIntegration = true;
     };
-    initContent = ''
-      export PATH=$HOME/.cargo/bin:$PATH
-    '';
-  };
-
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-    settings = {
-      "$schema" = "https://starship.rs/config-schema.json";
-      format = lib.concatStrings [
-        "[](color_orange)"
-        "$os"
-        "$username"
-        "[](bg:color_yellow fg:color_orange)"
-        "$directory"
-        "[](fg:color_yellow bg:color_aqua)"
-        "$git_branch"
-        "$git_status"
-        "[](fg:color_aqua bg:color_blue)"
-        "$c"
-        "$rust"
-        "$golang"
-        "$nodejs"
-        "$php"
-        "$java"
-        "$kotlin"
-        "$haskell"
-        "$python"
-        "[](fg:color_blue bg:color_bg3)"
-        "$docker_context"
-        "$conda"
-        "[](fg:color_bg3 bg:color_bg1)"
-        "$time"
-        "[ ](fg:color_bg1)"
-        "$line_break$character"
+    programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      historySubstringSearch.enable = true;
+      plugins = with pkgs; [
+        {
+          name = "fzf-tab";
+          src = zsh-fzf-tab;
+          file = "share/fzf-tab/fzf-tab.plugin.zsh";
+        }
+        {
+          name = "nix-zsh-completions";
+          src = nix-zsh-completions;
+          file = "share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
+          completions = [ "share/zsh/site-functions" ];
+        }
+        {
+          name = "fast-syntax-highlighting";
+          src = zsh-fast-syntax-highlighting;
+          file = "share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh";
+        }
       ];
+      initContent = ''
+        export PATH=$HOME/.cargo/bin:$PATH
 
-      palette = "gruvbox_dark";
+        # Prompt Engineering Starship
+        PROMPT_NEEDS_NEWLINE=false
 
-      palettes.gruvbox_dark = {
-        color_fg0 = "#fbf1c7";
-        color_bg1 = "#3c3836";
-        color_bg3 = "#665c54";
-        color_blue = "#458588";
-        color_aqua = "#689d6a";
-        color_green = "#98971a";
-        color_orange = "#d65d0e";
-        color_purple = "#b16286";
-        color_red = "#cc241d";
-        color_yellow = "#d79921";
-      };
+        precmd() {
+          if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
+            echo
+          fi
+          PROMPT_NEEDS_NEWLINE=true
+        }
 
-      os = {
-        disabled = false;
-        style = "bg:color_orange fg:color_fg0";
-        symbols = {
-          Windows = "󰍲";
-          Ubuntu = "󰕈";
-          SUSE = "";
-          Raspbian = "󰐿";
-          Mint = "󰣭";
-          Macos = "󰀵";
-          Manjaro = "";
-          Linux = "󰌽";
-          Gentoo = "󰣨";
-          Fedora = "󰣛";
-          Alpine = "";
-          Amazon = "";
-          Android = "";
-          Arch = "󰣇";
-          Artix = "󰣇";
-          EndeavourOS = "";
-          CentOS = "";
-          Debian = "󰣚";
-          Redhat = "󱄛";
-          RedHatEnterprise = "󱄛";
-          Pop = "";
-          NixOS = "";
+        clear() {
+          PROMPT_NEEDS_NEWLINE=false
+          command clear
+        }
+      '';
+    };
+
+    programs.starship = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+        add_newline = false;
+        format = lib.concatStrings [
+          "($username )"
+          "($hostname )"
+          "$directory "
+          "($git_branch )"
+          "($git_commit )"
+          "$git_state"
+          "$git_status"
+          "$fill"
+          "($status )"
+          "($cmd_duration )"
+          "($jobs )"
+          "($python )"
+          "($rust )"
+          "$time"
+          "$line_break$character"
+        ];
+        fill = {
+          symbol = " ";
         };
-      };
-
-      username = {
-        show_always = true;
-        style_user = "bg:color_orange fg:color_fg0";
-        style_root = "bg:color_orange fg:color_fg0";
-        format = "[ $user ]($style)";
-      };
-
-      directory = {
-        style = "fg:color_fg0 bg:color_yellow";
-        format = "[ $path ]($style)";
-        truncation_length = 3;
-        truncation_symbol = "…/";
-        substitutions = {
-          "Documents" = "󰈙 ";
-          "Downloads" = " ";
-          "Music" = "󰝚 ";
-          "Pictures" = " ";
-          "Developer" = "󰲋 ";
+        command_timeout = 60; # 60ms must be enough. I like a responsive prompt more than additional git information.
+        username = {
+          format = "[$user]($style)";
+          style_root = "bold red";
+          style_user = "bold purple";
+          aliases.root = "";
         };
-      };
-
-      git_branch = {
-        symbol = "";
-        style = "bg:color_aqua";
-        format = "[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)";
-      };
-
-      git_status = {
-        style = "bg:color_aqua";
-        format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)";
-      };
-
-      time = {
-        disabled = false;
-        time_format = "%R";
-        style = "bg:color_bg1";
-        format = "[[  $time ](fg:color_fg0 bg:color_bg1)]($style)";
-      };
-
-      character = {
-        disabled = false;
-        success_symbol = "[](bold fg:color_green)";
-        error_symbol = "[](bold fg:color_red)";
-        vimcmd_symbol = "[](bold fg:color_green)";
-        vimcmd_replace_one_symbol = "[](bold fg:color_purple)";
-        vimcmd_replace_symbol = "[](bold fg:color_purple)";
-        vimcmd_visual_symbol = "[](bold fg:color_yellow)";
+        hostname = {
+          format = "[$hostname]($style)[$ssh_symbol](green)";
+          ssh_only = true;
+          ssh_symbol = " 󰣀";
+          style = "bold red";
+        };
+        directory = {
+          format = "[$path]($style)[$read_only]($read_only_style)";
+          fish_style_pwd_dir_length = 1;
+          style = "bold blue";
+        };
+        character = {
+          success_symbol = "[>](bold green)";
+          error_symbol = "[>](red)";
+          vimcmd_symbol = "[](bold green)";
+          vimcmd_replace_one_symbol = "[](bold purple)";
+          vimcmd_replace_symbol = "[](bold purple)";
+          vimcmd_visual_symbol = "[](bold yellow)";
+        };
+        git_branch = {
+          format = "[$symbol$branch]($style)";
+          symbol = " ";
+          style = "green";
+        };
+        git_commit = {
+          commit_hash_length = 8;
+          format = "[$hash$tag]($style)";
+          style = "green";
+        };
+        git_status = {
+          conflicted = "$count";
+          ahead = "⇡$count";
+          behind = "⇣$count";
+          diverged = "⇡$ahead_count⇣$behind_count";
+          untracked = "?$count";
+          stashed = "\\$$count";
+          modified = "!$count";
+          staged = "+$count";
+          renamed = "→$count";
+          deleted = "-$count";
+          format = lib.concatStrings [
+            "[($conflicted )](red)"
+            "[($stashed )](magenta)"
+            "[($staged )](green)"
+            "[($deleted )](red)"
+            "[($renamed )](blue)"
+            "[($modified )](yellow)"
+            "[($untracked )](blue)"
+            "[($ahead_behind )](green)"
+          ];
+        };
+        status = {
+          disabled = false;
+          pipestatus = true;
+          pipestatus_format = "$pipestatus => [$int( $signal_name)]($style)";
+          pipestatus_separator = "[|]($style)";
+          pipestatus_segment_format = "[$status]($style)";
+          format = "[$status( $signal_name)]($style)";
+          style = "red";
+        };
+        python = {
+          format = "[$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)";
+        };
+        cmd_duration = {
+          format = "[ $duration]($style)";
+          style = "yellow";
+        };
+        time = {
+          format = "[ $time]($style)";
+          style = "cyan";
+          disabled = false;
+        };
       };
     };
   };

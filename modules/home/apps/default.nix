@@ -13,6 +13,7 @@ in
     inputs.spicetify-nix.homeManagerModules.default
     ./fastfetch
     ./zeditor.nix
+    ./ghostty.nix
     ./spicetify.nix
   ];
 
@@ -22,12 +23,12 @@ in
         home.packages =
           with pkgs;
           [
-            warp-terminal
             pavucontrol
             google-chrome
             gparted
             wpsoffice-cn
-            wechat-uos
+            wechat
+            peazip
           ]
           ++
             lib.optionals (lib.elem "gaming" profile.extraFeatures || lib.elem "full" profile.extraFeatures)

@@ -6,7 +6,11 @@ in
   config =
     lib.mkIf (lib.elem "extraApps" profile.extraFeatures || lib.elem "full" profile.extraFeatures)
       {
-        programs.clash-verge.enable = true;
+        programs.clash-verge = {
+          enable = true;
+          serviceMode = true;
+          tunMode = true;
+        };
         networking.firewall = {
           allowedTCPPorts = [ 7897 ];
           allowedUDPPorts = [ 7897 ];

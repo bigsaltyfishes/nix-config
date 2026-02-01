@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -7,6 +6,7 @@
 {
   config = {
     environment.systemPackages = with pkgs; [
+      unzip
       appimage-run
     ];
 

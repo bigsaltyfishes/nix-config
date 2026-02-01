@@ -1,6 +1,6 @@
 { ... }:
 {
   imports = [
-    ./end-4.nix
+    ./caelestia.nix
   ];
 }

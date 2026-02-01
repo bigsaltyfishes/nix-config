@@ -22,6 +22,7 @@ in
       {
         home.packages = with pkgs; [
           jq
+          nixd
           nil
           nixfmt-rfc-style
           (python3.withPackages (p: pypkgs))

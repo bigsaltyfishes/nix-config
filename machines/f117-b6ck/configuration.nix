@@ -9,11 +9,12 @@
     ./hardware-configuration.nix
   ];
 
-  molyuu.desktop.cosmic = {
+  molyuu.desktop.hyprland = {
     enable = true;
-    greeter.enable = true;
+    sddm.enable = true;
+    monitors = [ "eDP-1,1920x1080@60.00,0x0,1" ];
   };
-  
+
   molyuu.system.profiles = [
     "pc"
     "gaming"

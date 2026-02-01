@@ -3,31 +3,31 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { pkgs, ... }:
-    let
-      hsa-runtime-rocr4wsl-amdgpu = pkgs.stdenv.mkDerivation rec {
-        name = "hsa-runtime-rocr4wsl-amdgpu";
-        version = "25.10-2149029.24.04";
-        src = pkgs.fetchzip {
-          url = "https://repo.radeon.com/amdgpu/6.4/ubuntu/pool/main/h/${name}/${name}_${version}_amd64.deb";
-          hash = "sha256-DNvxgXJ8ln66cGC5DxMGnDw3gFz50srPalxpo9oLPKg=";
-          nativeBuildInputs = [ pkgs.dpkg ];
-        };
-        installPhase = ''
-          runHook preInstall
-          mkdir -p $out/lib
-          # TODO I'm guessing I should care about the specific ROCm version here...
-          mv opt/rocm-*/lib/* $out/lib
-          runHook postInstall
-        '';
-        buildInputs = [
-          pkgs.stdenv.cc.cc.lib
-          pkgs.elfutils
-        ];
-        nativeBuildInputs = [ pkgs.autoPatchelfHook ];
-        # this needs to get dynamically loaded in with another LD_LIBRARY_PATH
-        autoPatchelfIgnoreMissingDeps = [ "libdxcore.so" ]; 
-      };
-    in
+let
+  hsa-runtime-rocr4wsl-amdgpu = pkgs.stdenv.mkDerivation rec {
+    name = "hsa-runtime-rocr4wsl-amdgpu";
+    version = "25.10-2149029.24.04";
+    src = pkgs.fetchzip {
+      url = "https://repo.radeon.com/amdgpu/6.4/ubuntu/pool/main/h/${name}/${name}_${version}_amd64.deb";
+      hash = "sha256-DNvxgXJ8ln66cGC5DxMGnDw3gFz50srPalxpo9oLPKg=";
+      nativeBuildInputs = [ pkgs.dpkg ];
+    };
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/lib
+      # TODO I'm guessing I should care about the specific ROCm version here...
+      mv opt/rocm-*/lib/* $out/lib
+      runHook postInstall
+    '';
+    buildInputs = [
+      pkgs.stdenv.cc.cc.lib
+      pkgs.elfutils
+    ];
+    nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+    # this needs to get dynamically loaded in with another LD_LIBRARY_PATH
+    autoPatchelfIgnoreMissingDeps = [ "libdxcore.so" ];
+  };
+in
 {
   imports = [
     ../../profiles/minimum.nix
@@ -46,7 +46,7 @@
     ];
   };
 
-  security.sudo.wheelNeedsPassword = true;
+  security.sudo-rs.wheelNeedsPassword = true;
   virtualisation.docker.storageDriver = "overlay2";
 
   programs.nix-ld.libraries = [

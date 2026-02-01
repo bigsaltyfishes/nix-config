@@ -25,30 +25,32 @@
     NixOS-WSL-VSCode.url = "github:K900/vscode-remote-workaround";
     NixOS-WSL-VSCode.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Steam Deck
-    Jovian-NixOS.url = "github:bigsaltyfishes/Jovian-NixOS";
-    Jovian-NixOS.inputs.nixpkgs.follows = "nixpkgs";
-
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
     hyprland-plugins.inputs.hyprland.follows = "hyprland";
-    illogical-impulse.url = "github:bigsaltyfishes/end-4-dots/wip/update";
-    illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Niri
-    niri.url = "github:sodiboo/niri-flake";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    # Steam Deck
+    Jovian-NixOS.url = "github:bigsaltyfishes/Jovian-NixOS";
+    Jovian-NixOS.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Spotify customization
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # CachyOS Kernel
+    cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      niri,
       nur,
       NixOS-WSL,
       NixOS-WSL-VSCode,

@@ -14,6 +14,21 @@ in
   };
 
   config = {
+    services = {
+      kmscon = {
+        enable = true;
+        fonts = with pkgs; [
+          {
+            name = "JetBrainsMono Nerd Font";
+            package = nerd-fonts.jetbrains-mono;
+          }
+          {
+            name = "Source Han Sans SC";
+            package = source-han-sans;
+          }
+        ];
+      };
+    };
     i18n = {
       defaultLocale = "zh_CN.UTF-8";
       extraLocaleSettings = {
@@ -23,28 +38,27 @@ in
         "en_US.UTF-8/UTF-8"
         "zh_CN.UTF-8/UTF-8"
       ];
-      inputMethod =
-        {
-          enable = cfg.ibus.enable || cfg.fcitx5.enable;
-        }
-        // (
-          if cfg.ibus.enable then
-            {
-              type = "ibus";
-              ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
-            }
-          else if cfg.fcitx5.enable then
-            {
-              type = "fcitx5";
-              fcitx5.waylandFrontend = true;
-              fcitx5.addons = with pkgs; [
-                fcitx5-gtk
-                fcitx5-chinese-addons
-              ];
-            }
-          else
-            { }
-        );
+      inputMethod = {
+        enable = cfg.ibus.enable || cfg.fcitx5.enable;
+      }
+      // (
+        if cfg.ibus.enable then
+          {
+            type = "ibus";
+            ibus.engines = with pkgs.ibus-engines; [ libpinyin ];
+          }
+        else if cfg.fcitx5.enable then
+          {
+            type = "fcitx5";
+            fcitx5.waylandFrontend = true;
+            fcitx5.addons = with pkgs; [
+              fcitx5-gtk
+              qt6Packages.fcitx5-chinese-addons
+            ];
+          }
+        else
+          { }
+      );
     };
 
     time.timeZone = "Asia/Shanghai";
@@ -56,7 +70,7 @@ in
         source-han-sans
         source-han-serif
         jetbrains-mono
-        nerd-fonts.meslo-lg
+        nerd-fonts.jetbrains-mono
         ttf-ms-win10
         nur.repos.rewine.ttf-wps-fonts
       ];
@@ -65,7 +79,7 @@ in
         defaultFonts = {
           emoji = [ "Noto Color Emoji" ];
           monospace = [
-            "Sarasa Mono SC"
+            "JetBrainsMono Nerd Font"
           ];
           sansSerif = [
             "Source Han Sans SC"
