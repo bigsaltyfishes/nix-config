@@ -66,7 +66,9 @@ in
       systemd = {
         enable = true; # if you prefer starting from your compositor
         target = "graphical-session.target";
-        environment = [ ];
+        environment = [
+          "QS_ICON_THEME=Adwaita"
+        ];
       };
       settings = {
         appearance = {
@@ -80,6 +82,7 @@ in
             explorer = "nautilus";
           };
         };
+        background.enabled = !cfg.wallpaperEngine.enable;
         bar.status = {
           showBattery = false;
         };

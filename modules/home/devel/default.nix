@@ -32,6 +32,8 @@ in
           clang-tools
           lld
           lldb
+
+          android-tools
         ];
 
         programs.direnv = {

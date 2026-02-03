@@ -13,7 +13,15 @@ in
     monitors = [ "DP-1,1920x1080@165.00,0x0,1" ];
   };
 
-  molyuu.home-manager.theme.dotfile = "caelestia";
+  molyuu.home-manager.theme = {
+    dotfile = "caelestia";
+    wallpaperEngine = {
+      enable = true;
+      monitor = "DP-1";
+      scaling = "fill";
+      wallpaperId = "3540830583";
+    };
+  };
 
   virtualisation.docker.storageDriver = "zfs";
   molyuu.hardware.graphics.amdgpu.enable = true;

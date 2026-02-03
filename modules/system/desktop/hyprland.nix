@@ -27,6 +27,24 @@ in
       default = "";
       description = "The AGS theme to use";
     };
+    wallpaperEngine = {
+      enable = lib.mkEnableOption "Enable Wallpaper Engine integration";
+      monitor = lib.mkOption {
+        type = lib.types.str;
+        default = "DP-1";
+        description = "The monitor to set the wallpaper on (e.g. 'DP-1')";
+      };
+      scaling = lib.mkOption {
+        type = lib.types.str;
+        default = "fit";
+        description = "The scaling mode for the wallpaper";
+      };
+      wallpaperId = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "The Wallpaper Engine wallpaper ID to use";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
