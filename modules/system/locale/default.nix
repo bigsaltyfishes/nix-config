@@ -29,6 +29,13 @@ in
         ];
       };
     };
+
+    environment.sessionVariables = lib.mkIf cfg.fcitx5.enable {
+      XMODIFIERS = "@im=fcitx";
+      QT_IM_MODULE = "fcitx";
+      SDL_IM_MODULE = "fcitx";
+    };
+
     i18n = {
       defaultLocale = "zh_CN.UTF-8";
       extraLocaleSettings = {
