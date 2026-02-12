@@ -7,4 +7,6 @@
     ./theme
     ../../overlays
   ];
+
+  fonts.fontconfig.enable = true;
 }

@@ -14,7 +14,7 @@ in
   };
 
   molyuu.home-manager.theme = {
-    dotfile = "caelestia";
+    dotfile = "noctalia";
     wallpaperEngine = {
       enable = true;
       monitor = "DP-1";

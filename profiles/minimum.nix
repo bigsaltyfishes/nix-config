@@ -6,6 +6,7 @@
 {
   config = {
     environment.systemPackages = with pkgs; [
+      file
       unzip
       appimage-run
     ];

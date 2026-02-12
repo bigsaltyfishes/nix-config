@@ -42,6 +42,16 @@
       inputs.caelestia-cli.follows = "caelestia-cli";
     };
 
+    ambxst-shell = {
+      url = "github:bigsaltyfishes/Ambxst";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia = {
+      url = "github:bigsaltyfishes/noctalia-shell/fix/empty-lockscreen-background";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Steam Deck
     Jovian-NixOS.url = "github:bigsaltyfishes/Jovian-NixOS";
     Jovian-NixOS.inputs.nixpkgs.follows = "nixpkgs";
